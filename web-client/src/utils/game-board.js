@@ -74,6 +74,19 @@ export const killRows = (rows) => {
   };
 };
 
+export const rotateBlockLeft = block => [
+  [block[0][3], block[1][3], block[2][3], block[3][3]],
+  [block[0][2], block[1][2], block[2][2], block[3][2]],
+  [block[0][1], block[1][1], block[2][1], block[3][1]],
+  [block[0][0], block[1][0], block[2][0], block[3][0]],
+];
+
+export const rotateBlockRight = block => [
+  [block[3][0], block[2][0], block[1][0], block[0][0]],
+  [block[3][1], block[2][1], block[1][1], block[0][1]],
+  [block[3][2], block[2][2], block[1][2], block[0][2]],
+  [block[3][3], block[2][3], block[1][3], block[0][3]],
+];
 
 export const flatten = arr => arr
   .reduce((acc, val) => acc

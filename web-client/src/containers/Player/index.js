@@ -3,11 +3,16 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import {
-  Container,
-} from './styles';
+import { Container } from './styles';
 import { COL_NUMBER, TICK_MS } from '../../constants/game';
-import { applyPiece, generateBoardArray, getRandomBlock, intersects, killRows } from '../../utils/game-board';
+import {
+  applyPiece,
+  generateBoardArray,
+  getRandomBlock,
+  intersects,
+  killRows,
+  rotateBlockLeft, rotateBlockRight,
+} from '../../utils/game-board';
 import TetrisBoard from '../../components/TetrisBoard';
 import { gameOver } from '../../actions/app';
 
@@ -106,8 +111,39 @@ class Player extends React.Component<GamePropType, GameStateType> {
     }
 
     actions.gameOver();
-    console.log('game');
     return true;
+  };
+
+  rotateLeft = () => {
+    const newBlock = rotateBlockLeft(this.state.currentBlock);
+    if (!intersects(this.state.rows, newBlock, this.state.pieceY, this.state.pieceX)) {
+      this.setState({ currentBlock: newBlock });
+    }
+  };
+
+  rotateRight = () => {
+    const newBlock = rotateBlockRight(this.state.currentBlock);
+    if (!intersects(this.state.rows, newBlock, this.state.pieceY, this.state.pieceX)) {
+      this.setState({ currentBlock: newBlock });
+    }
+  };
+
+  moveLeft = () => {
+    if (!intersects(this.state.rows, this.state.currentBlock, this.state.pieceY, this.state.pieceX - 1)) {
+      this.setState({ pieceX: this.state.pieceX - 1 });
+    }
+  };
+
+  moveRight = () => {
+    if (!intersects(this.state.rows, this.state.currentBlock, this.state.pieceY, this.state.pieceX + 1)) {
+      this.setState({ pieceX: this.state.pieceX + 1 });
+    }
+  };
+
+  letFall = () => {
+    while (!intersects(this.state.rows, this.state.currentBlock, this.state.pieceY + 1, this.state.pieceX)) {
+      this.setState({ pieceY: this.state.pieceY + 1 });
+    }
   };
 
   render() {
