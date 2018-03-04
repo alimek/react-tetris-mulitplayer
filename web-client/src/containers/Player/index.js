@@ -3,9 +3,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { Container } from './styles';
+import { Container, OverContainer, OverText } from './styles';
 import { COL_NUMBER, TICK_MS } from '../../constants/game';
 import {
+  addLine,
   applyPiece,
   generateBoardArray,
   getRandomBlock,
@@ -34,6 +35,8 @@ type GameStateType = {
   rows: Array<Array<number>>,
   pieceX: number,
   pieceY: number,
+  addLines: number,
+  over: boolean,
 }
 
 class Player extends React.Component<GamePropType, GameStateType> {
@@ -58,6 +61,8 @@ class Player extends React.Component<GamePropType, GameStateType> {
     rows: generateBoardArray(),
     pieceY: 0,
     pieceX: 3,
+    addLines: 0,
+    over: false,
   };
 
   componentWillUnmount() {
@@ -81,16 +86,21 @@ class Player extends React.Component<GamePropType, GameStateType> {
       nextBlock,
       pieceX,
       pieceY,
+      addLines,
     } = this.state;
 
     if (isGameOver) {
       return false;
     }
 
-    let newRows;
+    let newRows = rows;
+
+    if (addLines > 0) {
+      newRows = this.addExtraLine(addLines);
+    }
 
     // check if block hit something, if not move it
-    if (!intersects(rows, currentBlock, pieceY + 1, pieceX)) {
+    if (!intersects(newRows, currentBlock, pieceY + 1, pieceX)) {
       this.setState({ pieceY: pieceY + 1 });
       return true;
     }
@@ -100,12 +110,12 @@ class Player extends React.Component<GamePropType, GameStateType> {
     this.setState({ rows: newRows });
 
     // check if we can remove full rows, if so render without them
-    const r = killRows(this.state.rows);
+    const r = killRows(newRows);
     if (r.numRowsKilled) {
       newRows = r.rows;
       socket.emit('score-up', {
         player,
-        score: 10,
+        score: r.numRowsKilled * 10,
       });
       this.setState({ rows: newRows });
     }
@@ -124,6 +134,9 @@ class Player extends React.Component<GamePropType, GameStateType> {
     }
 
     actions.gameOver();
+    this.setState({
+      over: true,
+    });
     return true;
   };
 
@@ -179,12 +192,24 @@ class Player extends React.Component<GamePropType, GameStateType> {
     }
   };
 
+  addExtraLine = (amount) => {
+    const newRows = addLine(this.state.rows, amount);
+
+    this.setState({
+      rows: newRows,
+      addLines: 0,
+    });
+
+    return newRows;
+  };
+
   render() {
     const {
       rows,
       currentBlock,
       pieceX,
       pieceY,
+      over,
     } = this.state;
 
     const applied = applyPiece(rows, currentBlock, pieceY, pieceX);
@@ -194,6 +219,12 @@ class Player extends React.Component<GamePropType, GameStateType> {
         <TetrisBoard
           rows={applied}
         />
+        {
+          over ?
+            <OverContainer>
+              <OverText>GAME OVER</OverText>
+            </OverContainer> : null
+        }
       </Container>
     );
   }

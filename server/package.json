@@ -8,6 +8,7 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
+    "debug": "^3.1.0",
     "http": "^0.0.0",
     "lodash": "^4.17.5",
     "socket.io": "^2.0.4"
@@ -19,6 +20,6 @@
     "nodemon": "^1.17.1"
   },
   "scripts": {
-    "start": "nodemon src/app.js"
+    "start": "DEBUG=tetris nodemon src/app.js"
   }
 }

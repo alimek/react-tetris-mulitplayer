@@ -1,4 +1,4 @@
-import { GAME_END, GAME_OVER, GAME_START } from '../constants/app';
+import { GAME_END, GAME_OVER, GAME_START, RESTORE_GAME } from '../constants/app';
 import socket from '../utils/socket';
 
 export const startGame = () => (dispatch) => {
@@ -11,3 +11,5 @@ export const endGame = () => (dispatch) => {
 };
 
 export const gameOver = () => ({ type: GAME_OVER });
+
+export const restoreGame = game => ({ type: RESTORE_GAME, ...game });

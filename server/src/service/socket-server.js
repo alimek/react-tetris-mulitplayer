@@ -1,5 +1,5 @@
 const server = require('http').createServer();
-const game = require('./game');
+const gameService = require('./game');
 
 const io = require('socket.io')(server, {
   pingInterval: 10000,
@@ -16,23 +16,25 @@ server.listen(8080);
 io.on('connection', (client) => {
   client.on('join-monitor', () => {
     client.join(MONITOR_ROOM);
+    client.emit('game', gameService.game);
   });
 
   client.on('login', ({ name }) => {
-    const player = game.addPlayer(name);
+    const player = gameService.addPlayer(name);
     client.player = player;
     client.emit('player-saved', player);
     client.join(PLAYERS_ROOM);
     client.join(`${PLAYER_ROOM}-${player.id}`);
     client.in(MONITOR_ROOM).emit('player-joined', player);
-    console.log(`Player added: ${player.name}`);
   });
 
   client.on('game-started', () => {
+    gameService.startGame();
     client.in(PLAYERS_ROOM).emit('game-started');
   });
 
   client.on('game-end', () => {
+    gameService.stopGame();
     client.in(PLAYERS_ROOM).emit('game-end');
   });
 
@@ -58,7 +60,7 @@ io.on('connection', (client) => {
 
   client.on('disconnect', () => {
     if (client.player) {
-      game.removePlayer(client.player.id);
+      gameService.removePlayer(client.player.id);
       io.in(MONITOR_ROOM).emit('player-left', client.player);
       console.log(`Player remove: ${client.player.name}`);
     }

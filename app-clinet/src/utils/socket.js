@@ -17,9 +17,5 @@ socket.on('player-saved', data => store.dispatch(save(data)));
 socket.on('game-started', () => store.dispatch(gameStarted()));
 socket.on('game-end', () => store.dispatch(gameEnd()));
 socket.on('score-up', score => store.dispatch(scoreUp(score)));
-socket.on('reconnect', () => {
-  const { player } = store.getState();
-  socket.emit('login', { name: player.name });
-});
 
 export default socket;

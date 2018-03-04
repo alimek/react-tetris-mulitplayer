@@ -1,4 +1,5 @@
 import { PLAYER_JOINED, PLAYER_LEFT, RESET_PLAYERS } from '../constants/players';
+import { RESTORE_GAME } from '../constants/app';
 
 export type PlayerType = {
   id: number,
@@ -29,6 +30,11 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         players: [...action.players],
+      };
+    case RESTORE_GAME:
+      return {
+        ...state,
+        players: action.players,
       };
     default:
       return state;

@@ -1,4 +1,4 @@
-import { GAME_END, GAME_OVER, GAME_START } from '../constants/app';
+import { GAME_END, GAME_OVER, GAME_START, RESTORE_GAME } from '../constants/app';
 
 const initialState = {
   ready: true,
@@ -23,6 +23,11 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         gameOver: true,
+      };
+    case RESTORE_GAME:
+      return {
+        ...state,
+        started: action.started,
       };
     default:
       return state;
