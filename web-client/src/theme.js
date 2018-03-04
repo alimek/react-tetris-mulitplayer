@@ -1,7 +1,7 @@
 const normalButtonColor = '#FFF';
-const activeButtonColor = '#ff850e';
+const primaryColor = '#ff850e';
 
 export default {
   normalButtonColor,
-  activeButtonColor,
+  primaryColor,
 };

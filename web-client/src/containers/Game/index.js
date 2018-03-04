@@ -4,19 +4,23 @@ import { connect } from 'react-redux';
 
 import {
   Container,
+  HeaderContainer,
+  PlayersContainer,
+  PlayerBoard,
 } from './styles';
-import { Header } from '../../components';
+import { Header, PlayerDetails } from '../../components';
 import { Menu, Player } from '../index';
 import { getRandomBlock } from '../../utils/game-board';
+import type { PlayerType } from '../../reducers/players';
 
 type GamePropType = {
   started: boolean,
+  players: Array<PlayerType>,
 }
 
 type GameStateType = {
   nextBlock: number[],
 }
-
 
 class Game extends React.Component<GamePropType, GameStateType> {
   state = {
@@ -24,7 +28,7 @@ class Game extends React.Component<GamePropType, GameStateType> {
   };
 
   renderPlayers = () => {
-    const { started } = this.props;
+    const { started, players } = this.props;
     const { nextBlock } = this.state;
 
     if (!started) {
@@ -32,17 +36,30 @@ class Game extends React.Component<GamePropType, GameStateType> {
     }
 
     return (
-      <Player
-        nextBlock={nextBlock}
-      />
+      <PlayersContainer>
+        {
+          players.map(player => (
+            <PlayerBoard key={player.id}>
+              <PlayerDetails player={player} />
+              <Player
+                player={player}
+                nextBlock={nextBlock}
+              />
+            </PlayerBoard>
+          ))
+        }
+      </PlayersContainer>
+
     );
   };
 
   render() {
     return (
       <Container>
-        <Header>Multiplayer Tetris</Header>
-        <Menu />
+        <HeaderContainer>
+          <Header>Multiplayer Tetris</Header>
+          <Menu />
+        </HeaderContainer>
         {this.renderPlayers()}
       </Container>
     );
@@ -52,6 +69,7 @@ class Game extends React.Component<GamePropType, GameStateType> {
 export default connect(
   store => ({
     started: store.app.started,
+    players: store.players.players,
     isGameOver: store.app.gameOver,
   }),
 )(Game);

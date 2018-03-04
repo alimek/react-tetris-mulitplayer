@@ -15,6 +15,8 @@ import {
 } from '../../utils/game-board';
 import TetrisBoard from '../../components/TetrisBoard';
 import { gameOver } from '../../actions/app';
+import socket from '../../utils/socket';
+import type { PlayerType } from '../../reducers/players';
 
 type ActionsType = {
   gameOver: Function,
@@ -23,6 +25,7 @@ type ActionsType = {
 type GamePropType = {
   isGameOver: boolean,
   actions: ActionsType,
+  player: PlayerType,
 }
 
 type GameStateType = {
@@ -36,6 +39,12 @@ type GameStateType = {
 class Player extends React.Component<GamePropType, GameStateType> {
   constructor(props) {
     super(props);
+
+    socket.on('move-left', this.moveLeft);
+    socket.on('move-right', this.moveRight);
+    socket.on('rotate-left', this.rotateLeft);
+    socket.on('rotate-right', this.rotateRight);
+    socket.on('fall-down', this.letFall);
 
     this.intervalHandler = setInterval(
       this.tick,
@@ -65,7 +74,7 @@ class Player extends React.Component<GamePropType, GameStateType> {
   intervalHandler;
 
   tick = () => {
-    const { isGameOver, actions } = this.props;
+    const { isGameOver, actions, player } = this.props;
     const {
       rows,
       currentBlock,
@@ -94,6 +103,10 @@ class Player extends React.Component<GamePropType, GameStateType> {
     const r = killRows(this.state.rows);
     if (r.numRowsKilled) {
       newRows = r.rows;
+      socket.emit('score-up', {
+        player,
+        score: 10,
+      });
       this.setState({ rows: newRows });
     }
 
@@ -114,33 +127,53 @@ class Player extends React.Component<GamePropType, GameStateType> {
     return true;
   };
 
-  rotateLeft = () => {
+  rotateLeft = (player) => {
+    if (player.id !== this.props.player.id) {
+      return;
+    }
+
     const newBlock = rotateBlockLeft(this.state.currentBlock);
     if (!intersects(this.state.rows, newBlock, this.state.pieceY, this.state.pieceX)) {
       this.setState({ currentBlock: newBlock });
     }
   };
 
-  rotateRight = () => {
+  rotateRight = (player) => {
+    if (player.id !== this.props.player.id) {
+      return;
+    }
+
     const newBlock = rotateBlockRight(this.state.currentBlock);
     if (!intersects(this.state.rows, newBlock, this.state.pieceY, this.state.pieceX)) {
       this.setState({ currentBlock: newBlock });
     }
   };
 
-  moveLeft = () => {
+  moveLeft = (player) => {
+    if (player.id !== this.props.player.id) {
+      return;
+    }
+
     if (!intersects(this.state.rows, this.state.currentBlock, this.state.pieceY, this.state.pieceX - 1)) {
       this.setState({ pieceX: this.state.pieceX - 1 });
     }
   };
 
-  moveRight = () => {
+  moveRight = (player) => {
+    if (player.id !== this.props.player.id) {
+      return;
+    }
+
     if (!intersects(this.state.rows, this.state.currentBlock, this.state.pieceY, this.state.pieceX + 1)) {
       this.setState({ pieceX: this.state.pieceX + 1 });
     }
   };
 
-  letFall = () => {
+  letFall = (player) => {
+    if (player.id !== this.props.player.id) {
+      return;
+    }
+
     while (!intersects(this.state.rows, this.state.currentBlock, this.state.pieceY + 1, this.state.pieceX)) {
       this.setState({ pieceY: this.state.pieceY + 1 });
     }

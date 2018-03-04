@@ -2,7 +2,7 @@ import { GAME_END, GAME_OVER, GAME_START } from '../constants/app';
 
 const initialState = {
   ready: true,
-  started: true,
+  started: false,
   gameOver: false,
 };
 

@@ -7,11 +7,15 @@ import {
 
 export const Container = styled.div`
   box-sizing: border-box;
+  width: ${BLOCK_WIDTH * COL_NUMBER}px;
+  position: relative;
+  left: 50%;
+  margin-left: -${(BLOCK_WIDTH * COL_NUMBER) / 2}px;
 `;
 
 const getBlockColor = ({ isBlock, theme }) => {
   if (isBlock) {
-    return theme.activeButtonColor;
+    return theme.primaryColor;
   }
   return theme.normalButtonColor;
 };
