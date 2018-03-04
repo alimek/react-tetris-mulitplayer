@@ -1,35 +1,20 @@
-import { CHANGE_NAME, SAVE_FROM_SOCKET } from '../constants/player';
-import { GAME_END, GAME_STARTED } from '../constants/game';
+import { GAME_STATUS_WAITING } from '../constants/game';
+import { GAME_STATUS_UPDATED } from '../constants/socket';
 
 export type GameType = {
-  started: boolean,
+  status: string,
 };
 
 const initialState = {
-  started: false,
+  status: GAME_STATUS_WAITING,
 };
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {
-    case SAVE_FROM_SOCKET:
+    case GAME_STATUS_UPDATED:
       return {
         ...state,
-        id: action.id,
-      };
-    case CHANGE_NAME:
-      return {
-        ...state,
-        name: action.name,
-      };
-    case GAME_STARTED:
-      return {
-        ...state,
-        started: true,
-      };
-    case GAME_END:
-      return {
-        ...state,
-        started: false,
+        status: action.status,
       };
     default:
       return state;

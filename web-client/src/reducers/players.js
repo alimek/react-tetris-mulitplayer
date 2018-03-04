@@ -1,10 +1,12 @@
 import { PLAYER_JOINED, PLAYER_LEFT, RESET_PLAYERS } from '../constants/players';
 import { RESTORE_GAME } from '../constants/app';
+import { PLAYER_BOARD_UPDATED } from '../constants/socket';
 
 export type PlayerType = {
   id: number,
   name: string,
   score: number,
+  board: Array<Array<number>>,
 };
 
 const initialState = {
@@ -32,6 +34,11 @@ export default (state = initialState, action = {}) => {
         players: [...action.players],
       };
     case RESTORE_GAME:
+      return {
+        ...state,
+        players: action.players,
+      };
+    case PLAYER_BOARD_UPDATED:
       return {
         ...state,
         players: action.players,

@@ -10,6 +10,4 @@ export const DISCONNECT = 'disconnect';
 export const GAME_STARTED = 'game-started';
 export const PLAYER_BOARD_UPDATED = 'player-board-updated';
 export const GAME_END = 'game-end';
-export const GAME_OVER = 'game-over';
-export const CONNECTED = 'socket.connected';
-export const DISCONNECTED = 'socket.disconnected';
+export const PLAYER_LEFT = 'player-left';

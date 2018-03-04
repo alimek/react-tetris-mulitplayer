@@ -1,70 +1,35 @@
 const server = require('http').createServer();
-const gameService = require('./game');
 
 const io = require('socket.io')(server, {
   pingInterval: 10000,
   pingTimeout: 5000,
   cookie: false
 });
-
-const MONITOR_ROOM = 'monitor';
-const PLAYERS_ROOM = 'players';
-const PLAYER_ROOM = 'player';
-
 server.listen(8080);
 
+
+const actions = require('../actions/socket');
+const {
+  LOGIN_AS_MONITOR,
+  LOGIN_AS_PLAYER,
+  DISCONNECT,
+  PLAYER_BOARD_UPDATED,
+  GAME_STARTED,
+  GAME_END,
+  GAME_OVER,
+} = require('../constatnts/socket');
+
 io.on('connection', (client) => {
-  client.on('join-monitor', () => {
-    client.join(MONITOR_ROOM);
-    client.emit('game', gameService.game);
-  });
-
-  client.on('login', ({ name }) => {
-    const player = gameService.addPlayer(name);
-    client.player = player;
-    client.emit('player-saved', player);
-    client.join(PLAYERS_ROOM);
-    client.join(`${PLAYER_ROOM}-${player.id}`);
-    client.in(MONITOR_ROOM).emit('player-joined', player);
-  });
-
-  client.on('game-started', () => {
-    gameService.startGame();
-    client.in(PLAYERS_ROOM).emit('game-started');
-  });
-
-  client.on('game-end', () => {
-    gameService.stopGame();
-    client.in(PLAYERS_ROOM).emit('game-end');
-  });
-
-  client.on('score-up', ({ player, score }) => {
-    client.in(`${PLAYER_ROOM}-${player.id}`).emit('score-up', score);
-  });
-
-  client.on('rotate-left', () => {
-    client.in(MONITOR_ROOM).emit('rotate-left', client.player);
-  });
-  client.on('rotate-right', () => {
-    client.in(MONITOR_ROOM).emit('rotate-right', client.player);
-  });
-  client.on('move-left', () => {
-    client.in(MONITOR_ROOM).emit('move-left', client.player);
-  });
-  client.on('move-right', () => {
-    client.in(MONITOR_ROOM).emit('move-right', client.player);
-  });
-  client.on('fall-down', () => {
-    client.in(MONITOR_ROOM).emit('fall-down', client.player);
-  });
-
-  client.on('disconnect', () => {
-    if (client.player) {
-      gameService.removePlayer(client.player.id);
-      io.in(MONITOR_ROOM).emit('player-left', client.player);
-      console.log(`Player remove: ${client.player.name}`);
-    }
-  });
+  client.on(LOGIN_AS_MONITOR, () => actions.loginAsMonitor(client));
+  client.on(LOGIN_AS_PLAYER, name => actions.loginAsPlayer(client, name));
+  client.on(DISCONNECT, () => actions.onDisconnect(client, io));
+  client.on(PLAYER_BOARD_UPDATED, data => actions.onPlayerBoardUpdated(client, data));
+  client.on(GAME_STARTED, () => actions.onGameStarted(client, io));
+  client.on(GAME_END, () => actions.onGameEnd(client, io));
+  client.on(GAME_OVER, () => actions.onGameOver(client, io))
+  // client.on('score-up', ({ player, score }) => {
+  //   client.in(`${PLAYER_ROOM}-${player.id}`).emit('score-up', score);
+  // });
 });
 
 module.exports = io;

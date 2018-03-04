@@ -9,9 +9,9 @@ import {
   PlayerBoard,
 } from './styles';
 import { Header, PlayerDetails } from '../../components';
-import { Menu, Player } from '../index';
-import { getRandomBlock } from '../../utils/game-board';
+import { Menu } from '../index';
 import type { PlayerType } from '../../reducers/players';
+import TetrisBoard from '../../components/TetrisBoard';
 
 type GamePropType = {
   started: boolean,
@@ -23,13 +23,8 @@ type GameStateType = {
 }
 
 class Game extends React.Component<GamePropType, GameStateType> {
-  state = {
-    nextBlock: getRandomBlock(),
-  };
-
   renderPlayers = () => {
     const { started, players } = this.props;
-    const { nextBlock } = this.state;
 
     if (!started) {
       return null;
@@ -41,9 +36,8 @@ class Game extends React.Component<GamePropType, GameStateType> {
           players.map(player => (
             <PlayerBoard key={player.id}>
               <PlayerDetails player={player} />
-              <Player
-                player={player}
-                nextBlock={nextBlock}
+              <TetrisBoard
+                rows={player.board}
               />
             </PlayerBoard>
           ))

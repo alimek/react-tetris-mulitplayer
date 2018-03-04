@@ -1,8 +1,9 @@
-import { GAME_END, GAME_OVER, GAME_STARTED } from '../constants/game';
+import { GAME_END, GAME_OVER } from '../constants/game';
 
 import socket from '../utils/socket';
+import { GAME_STATUS_UPDATED } from '../constants/socket';
 
-export const gameStarted = () => ({ type: GAME_STARTED });
+export const gameStatusUpdated = status => ({ type: GAME_STATUS_UPDATED, status });
 export const gameOver = () => ({ type: GAME_OVER });
 export const gameEnd = () => ({ type: GAME_END });
 
