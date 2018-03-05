@@ -17,6 +17,7 @@ const {
   GAME_STARTED,
   GAME_END,
   GAME_OVER,
+  PLAYER_DESTROYED_ROWS,
 } = require('../constatnts/socket');
 
 io.on('connection', (client) => {
@@ -27,6 +28,7 @@ io.on('connection', (client) => {
   client.on(GAME_STARTED, () => actions.onGameStarted(client, io));
   client.on(GAME_END, () => actions.onGameEnd(client, io));
   client.on(GAME_OVER, () => actions.onGameOver(client, io))
+  client.on(PLAYER_DESTROYED_ROWS, amount => actions.onDestroyedRows(client, io, amount));
   // client.on('score-up', ({ player, score }) => {
   //   client.in(`${PLAYER_ROOM}-${player.id}`).emit('score-up', score);
   // });

@@ -9,7 +9,7 @@ export type PlayerType = {
 
 const initialState = {
   id: null,
-  name: '',
+  name: 'sdsd',
   score: 0,
   isReady: false,
 };

@@ -10,4 +10,5 @@ export const GAME_STATUS_WAITING = 'waiting';
 export const GAME_STATUS_IN_PROGRESS = 'in-progress';
 export const GAME_STATUS_PAUSED = 'paused';
 export const GAME_STATUS_OVER = 'over';
+export const WALLS_APPLIED = 'tetris.game.applied';
 

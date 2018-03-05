@@ -3827,6 +3827,14 @@ react-native-gesture-handler@1.0.0-alpha.39:
     invariant "^2.2.2"
     prop-types "^15.5.10"
 
+react-native-ios-kit@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/react-native-ios-kit/-/react-native-ios-kit-0.0.4.tgz#81623ae3f7ff0855c2f559c57789605f1a0a352c"
+  dependencies:
+    color "^2.0.1"
+    lodash "^4.17.4"
+    prop-types "^15.6.0"
+
 react-native-iphone-x-helper@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.0.2.tgz#7dbca530930f7c1ce8633cc8fd13ba94102992e1"

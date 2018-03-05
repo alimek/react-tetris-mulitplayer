@@ -12,15 +12,19 @@ import {
   killRows, rotateBlockLeft, rotateBlockRight, addLine,
 } from '../../utils/game-board';
 import { COL_NUMBER, GAME_STATUS_OVER, TICK_MS } from '../../constants/game';
-import { onBoardUpdate, onGameOver } from '../../actions/socket';
+import { onBoardUpdate, onGameOver, onWallsApplied } from '../../actions/socket';
 import { scoreUp } from '../../actions/player';
+import { onDestroyedRows } from '../../actions/game';
 
 type GameBoardType = {
   gameStatus: string,
   actions: {
     onGameOver: Function,
     scoreUp: Function,
+    onDestroyedRows: Function,
+    onWallsApplied: Function,
   },
+  addLines: number,
 };
 
 class GameBoard extends React.Component<GameBoardType> {
@@ -39,7 +43,6 @@ class GameBoard extends React.Component<GameBoardType> {
     rows: generateBoardArray(),
     pieceY: 0,
     pieceX: 3,
-    addLines: 0,
   };
 
   componentWillUnmount() {
@@ -56,14 +59,13 @@ class GameBoard extends React.Component<GameBoardType> {
   intervalHandler;
 
   tick = () => {
-    const { gameStatus, actions } = this.props;
+    const { gameStatus, actions, addLines } = this.props;
     const {
       rows,
       currentBlock,
       nextBlock,
       pieceX,
       pieceY,
-      addLines,
     } = this.state;
 
     if (gameStatus === GAME_STATUS_OVER) {
@@ -74,6 +76,7 @@ class GameBoard extends React.Component<GameBoardType> {
 
     if (addLines > 0) {
       newRows = this.addExtraLine(addLines);
+      actions.onWallsApplied();
     }
 
     // check if block hit something, if not move it
@@ -92,6 +95,9 @@ class GameBoard extends React.Component<GameBoardType> {
       newRows = r.rows;
       this.setState({ rows: newRows });
       const extraPoints = r.numRowsKilled > 3 ? r.numRowsKilled * 0.5 : 0;
+      if (r.numRowsKilled > 1) {
+        actions.onDestroyedRows(r.numRowsKilled);
+      }
       actions.scoreUp(r.numRowsKilled * 10 + extraPoints);
     }
 
@@ -194,12 +200,15 @@ class GameBoard extends React.Component<GameBoardType> {
 export default connect(
   store => ({
     gameStatus: store.game.status,
+    addLines: store.game.addLines,
   }),
   dispatch => ({
     actions: bindActionCreators({
       onBoardUpdate,
       onGameOver,
       scoreUp,
+      onDestroyedRows,
+      onWallsApplied,
     }, dispatch),
   }),
 )(GameBoard);

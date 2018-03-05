@@ -11,3 +11,5 @@ module.exports.GAME_STARTED = 'game-started';
 module.exports.PLAYER_BOARD_UPDATED = 'player-board-updated';
 module.exports.GAME_END = 'game-end';
 module.exports.GAME_OVER = 'game-over';
+module.exports.PLAYER_DESTROYED_ROWS = 'player-destroyed-rows';
+module.exports.OTHER_PLAYER_DESTROYED_ROWS = 'other-player-destroyed-rows';

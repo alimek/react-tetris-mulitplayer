@@ -49,10 +49,6 @@ export const intersects = (rows, piece, y, x) => {
 };
 
 const getWallsNumberToBeRemoved = (currentWallsLines, collectedLines) => {
-  if (collectedLines === 1 && currentWallsLines === 1) {
-    return 0;
-  }
-
   if (collectedLines > currentWallsLines) {
     return currentWallsLines;
   }
