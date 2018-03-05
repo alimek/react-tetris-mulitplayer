@@ -2,10 +2,11 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { StackNavigator } from 'react-navigation';
 import { ThemeProvider } from 'styled-components/native';
+import { ThemeProvider as UITheme, DefaultTheme } from 'react-native-ios-kit';
 import Expo from 'expo';
 
 import store from './src/store';
-import theme from './src/theme';
+import { styledComponents, primaryColor } from './src/theme';
 import { Home, Game } from './src/screens';
 
 const Navigator = StackNavigator({
@@ -14,6 +15,10 @@ const Navigator = StackNavigator({
   },
   Game: {
     screen: Game,
+  },
+}, {
+  cardStyle: {
+    backgroundColor: 'white',
   },
 });
 
@@ -33,8 +38,10 @@ export default class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <ThemeProvider theme={theme}>
-          <Navigator />
+        <ThemeProvider theme={styledComponents}>
+          <UITheme theme={DefaultTheme}>
+            <Navigator />
+          </UITheme>
         </ThemeProvider>
       </Provider>
     );

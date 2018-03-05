@@ -7,14 +7,20 @@ const {
   PLAYER_BOARD_UPDATED,
   ALL_PLAYERS_ROOM,
   OTHER_PLAYER_DESTROYED_ROWS,
+  PLAYER_STATUS,
 } = require('../constatnts/socket');
 const game = require('./game');
 const Player = require('../models/player');
 const { getPlayerRoom } = require('../utils/player');
 
+const emitGameStatus = (io) => {
+  io.in(ALL_PLAYERS_ROOM).emit(GAME_STATUS_UPDATED, game.getStatus());
+  io.in(MONITOR_ROOM).emit(GAME_STATUS_UPDATED, game.getStatus());
+};
+
 module.exports.loginAsMonitor = (client) => {
   client.join(MONITOR_ROOM);
-  client.in(MONITOR_ROOM).emit(GAME_STATUS_UPDATED, game.getStatus());
+  emitGameStatus(client);
   client.monitor = true;
   debug('New monitor connection');
 };
@@ -51,19 +57,42 @@ module.exports.onPlayerBoardUpdated = (client, data) => {
 
 module.exports.onGameStarted = (client, io) => {
   game.start();
-  io.in(ALL_PLAYERS_ROOM).emit(GAME_STATUS_UPDATED, game.getStatus());
+  emitGameStatus(io);
 };
 
 module.exports.onGameEnd = (client, io) => {
   game.stop();
-  io.in(ALL_PLAYERS_ROOM).emit(GAME_STATUS_UPDATED, game.getStatus());
+  emitGameStatus(io);
 };
 
 module.exports.onGameOver = (client, io) => {
   game.over();
-  io.in(ALL_PLAYERS_ROOM).emit(GAME_STATUS_UPDATED, game.getStatus());
+  emitGameStatus(io);
 };
 
 module.exports.onDestroyedRows = (client, io, amount) => {
   client.broadcast.to(ALL_PLAYERS_ROOM).emit(OTHER_PLAYER_DESTROYED_ROWS, amount);
+};
+
+module.exports.onPlayerReady = (client, io, isReady) => {
+  client.player.isReady = isReady;
+  debug(`Player changed status. ${client.player.name} - ${isReady}`);
+  const oldStatus = game.getStatus();
+  io.in(MONITOR_ROOM).emit(PLAYER_STATUS, client.player);
+  if (game.checkPlayersReady()) {
+    debug('Game is ready to start');
+    game.setReady();
+  } else {
+    game.setWaiting();
+  }
+  if (oldStatus !== game.getStatus()) {
+    debug('Sent game status changed');
+    emitGameStatus(io);
+  }
+};
+
+module.exports.startGame = (client, io) => {
+  game.start();
+  emitGameStatus(io);
+  debug('Game started');
 };

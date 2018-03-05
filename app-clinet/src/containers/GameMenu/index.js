@@ -24,7 +24,11 @@ class GameMenu extends React.Component<GameMenuPropTypes> {
     return (
       <Container>
         <Row>
-          <BackButton onPress={goBack}>
+          <BackButton
+            onPress={goBack}
+            inverted
+            rounded
+          >
             <ButtonText>Leave game</ButtonText>
           </BackButton>
           <StatusText isConnected={connected}>

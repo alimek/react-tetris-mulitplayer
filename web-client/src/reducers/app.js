@@ -1,8 +1,10 @@
 import { GAME_END, GAME_OVER, GAME_START, RESTORE_GAME } from '../constants/app';
+import { GAME_STATUS_WAITING } from '../constants/game';
+import { GAME_STATUS_UPDATED } from '../constants/socket';
 
 const initialState = {
   ready: true,
-  started: false,
+  status: GAME_STATUS_WAITING,
   gameOver: false,
 };
 
@@ -28,6 +30,11 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         started: action.started,
+      };
+    case GAME_STATUS_UPDATED:
+      return {
+        ...state,
+        status: action.status,
       };
     default:
       return state;

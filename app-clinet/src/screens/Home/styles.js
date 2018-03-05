@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import { Button, TextField } from 'react-native-ios-kit';
 
 export const Container = styled.SafeAreaView`
   flex: 1;
@@ -17,19 +18,10 @@ export const Label = styled.Text`
   font-weight: bold;
 `;
 
-export const Input = styled.TextInput`
-  background-color: white;
-  border: 1px solid #cbcbcb;
-  padding: 10px;
-  border-radius: 10px;
-  margin-top: 10px;
-  font-size: 30px;
+export const Input = styled(TextField)`
 `;
 
-export const Button = styled.TouchableOpacity`
-  padding: 25px;
-  background-color: ${props => props.disabled ? props.theme.disabledPrimaryColor : props.theme.primaryColor};
-  border-radius: 10px;
+export const CustomButton = styled(Button)`
   margin-top: 20px;
 `;
 

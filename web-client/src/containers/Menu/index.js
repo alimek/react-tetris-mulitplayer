@@ -1,5 +1,5 @@
 // @flow
-import React, { Fragment } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -9,35 +9,17 @@ import {
   DetailsText,
 } from './styles';
 
-import { Button } from '../../components';
 import { endGame, startGame } from '../../actions/app';
 import type { PlayerType } from '../../reducers/players';
 
 type MenuPropTypes = {
-  actions: {
-    startGame: Function,
-    endGame: Function,
-  },
-  started: boolean,
   players: Array<PlayerType>,
+  status: string,
 };
 
-
 class Menu extends React.Component<MenuPropTypes> {
-  renderStartedGameButtons = () => {
-    const { actions } = this.props;
-
-    return (
-      <Fragment>
-        <Button onClick={actions.endGame}>
-          Stop Game
-        </Button>
-      </Fragment>
-    );
-  };
-
   render() {
-    const { actions, started, players } = this.props;
+    const { players, status } = this.props;
 
     return (
       <Container>
@@ -45,13 +27,7 @@ class Menu extends React.Component<MenuPropTypes> {
           <DetailsText isLabel>Connected Players:</DetailsText>
           <DetailsText>{players.length}</DetailsText>
         </Details>
-        {started ? this.renderStartedGameButtons() : null}
-        {
-          !started && players.length > 0 ?
-            <Button onClick={actions.startGame}>
-              Start Game
-            </Button> : null
-        }
+        {status}
         {players.length === 0 ? <span>Waiting for players</span> : null}
       </Container>
     );
@@ -60,7 +36,7 @@ class Menu extends React.Component<MenuPropTypes> {
 
 export default connect(
   store => ({
-    started: store.app.started,
+    status: store.app.status,
     players: store.players.players,
   }),
   dispatch => ({

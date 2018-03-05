@@ -3,6 +3,7 @@ class Player {
     this.id = id;
     this.name = name;
     this.score = 0;
+    this.isReady = false;
   }
 
   addScore() {

@@ -15,10 +15,5 @@ export const HeaderContainer = styled.div`
 export const PlayersContainer = styled.div`
   display: flex;
   flex: 1;
-`;
-
-export const PlayerBoard = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+  justify-content: space-around;
 `;

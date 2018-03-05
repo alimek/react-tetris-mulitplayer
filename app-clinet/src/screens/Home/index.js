@@ -8,7 +8,7 @@ import {
   Header,
   Label,
   Input,
-  Button,
+  CustomButton,
   ButtonText,
 } from './styles';
 import { changeName } from '../../actions/player';
@@ -39,12 +39,14 @@ class Home extends React.Component<HomePropType> {
           onChangeText={actions.changeName}
         />
 
-        <Button
+        <CustomButton
+          rounded
+          inverted
           disabled={name.length < 3}
           onPress={() => navigation.navigate('Game')}
         >
           <ButtonText>Join Game</ButtonText>
-        </Button>
+        </CustomButton>
       </Container>
     );
   }

@@ -7,6 +7,7 @@ const {
   GAME_STATUS_OVER,
   GAME_STATUS_PAUSED,
   GAME_STATUS_WAITING,
+  GAME_STATUS_READY,
 } = require('../constatnts/game');
 
 
@@ -27,7 +28,7 @@ module.exports.over = () => {
 };
 
 module.exports.stop = () => {
-  game.status = GAME_STATUS_WAITING;
+  module.exports.setWaiting();
   game.players.forEach(player => player.score = 0);
   debug('Game restarted');
 };
@@ -52,4 +53,24 @@ module.exports.removePlayer = (player) => {
   }
 };
 
+module.exports.checkPlayersReady = () => {
+  let ready = 0;
+
+  game.players.forEach((player) => {
+    if (player.isReady) {
+     ready += 1;
+    }
+  });
+
+  return ready === game.players.length;
+};
+
 module.exports.getStatus = () => game.status;
+
+module.exports.setReady = () => {
+  game.status = GAME_STATUS_READY;
+};
+
+module.exports.setWaiting = () => {
+  game.status = GAME_STATUS_WAITING;
+};

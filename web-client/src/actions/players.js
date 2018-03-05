@@ -25,3 +25,22 @@ export const playerBoardUpdate = ({ playerId, board, score }) => (dispatch) => {
     dispatch({ type: PLAYER_BOARD_UPDATED, players: cloneDeep(players) });
   }
 };
+
+export const setPlayerStatus = player => (dispatch) => {
+  const { id } = player;
+  const currentStore = store.getState();
+  const { players } = currentStore.players;
+  const playerState = find(players, { id });
+  remove(players, { id });
+
+  dispatch({
+    type: PLAYER_BOARD_UPDATED,
+    players: [
+      ...players,
+      {
+        ...player,
+        board: playerState.board,
+      },
+    ],
+  });
+};

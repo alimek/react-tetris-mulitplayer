@@ -4,7 +4,7 @@ import {
   BLOCK_WIDTH,
   COL_NUMBER, ROW_NUMBER,
 } from '../../constants/game';
-import { normalButtonColor, primaryColor, wallColor } from '../../theme';
+import { blockColor, primaryColor, wallColor } from '../../theme';
 
 export const Container = styled.View`
   flex: 1;
@@ -27,7 +27,7 @@ const getBlockColor = (isBlock) => {
     return wallColor;
   }
 
-  return normalButtonColor;
+  return blockColor;
 };
 
 export const Block = styled.View`

@@ -1,4 +1,4 @@
-import { CHANGE_NAME, PLAYER_READY, PLAYER_SCORE_UP, SAVE_FROM_SOCKET } from '../constants/player';
+import { CHANGE_NAME, PLAYER_READY, PLAYER_SCORE_UP, SAVE_FROM_SOCKET, TOGGLE_PLAYER_READY } from '../constants/player';
 
 export type PlayerType = {
   id?: number,
@@ -20,6 +20,11 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         isReady: true,
+      };
+    case TOGGLE_PLAYER_READY:
+      return {
+        ...state,
+        isReady: !state.isReady,
       };
     case SAVE_FROM_SOCKET:
       return {

@@ -1,13 +1,19 @@
 import styled from 'styled-components/native';
 
+import { Button } from 'react-native-ios-kit';
+
 export const Container = styled.View`
   flex-direction: column;
-  margin-top: 10px;
+  padding-top: 50px;
   align-items: center;
+  background-color: #dddddd;
+  border-bottom-width: 1px;
+  border-bottom-color: #c5c5c5;
 `;
 
 export const Row = styled.View`
-  flex-direction: row;;
+  flex-direction: row;
+  margin-top: 10px;
 `;
 
 export const Text = styled.Text`
@@ -17,11 +23,8 @@ export const Text = styled.Text`
   padding: 5px 10px;
 `;
 
-export const BackButton = styled.TouchableOpacity`
-  padding: 10px;
+export const BackButton = styled(Button)`
   margin: 0 15px;
-  background-color: ${props => props.theme.primaryColor};
-  border-radius: 5px;
 `;
 
 export const ButtonText = styled.Text`
@@ -34,5 +37,5 @@ export const StatusText = styled.Text`
   text-align: right;
   font-size: 15px;
   padding: 0 15px;
-  color: ${props => props.isConnected ? '#abd14d' : '#d51630'};
+  color: ${props => props.isConnected ? '#b0d64d' : '#d51630'};
 `;

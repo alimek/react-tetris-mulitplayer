@@ -6,15 +6,12 @@ import {
   Container,
   HeaderContainer,
   PlayersContainer,
-  PlayerBoard,
 } from './styles';
-import { Header, PlayerDetails } from '../../components';
-import { Menu } from '../index';
+import { Header } from '../../components';
+import { Menu, PlayerBoard } from '../index';
 import type { PlayerType } from '../../reducers/players';
-import TetrisBoard from '../../components/TetrisBoard';
 
 type GamePropType = {
-  started: boolean,
   players: Array<PlayerType>,
 }
 
@@ -23,38 +20,25 @@ type GameStateType = {
 }
 
 class Game extends React.Component<GamePropType, GameStateType> {
-  renderPlayers = () => {
-    const { started, players } = this.props;
-
-    if (!started) {
-      return null;
-    }
-
-    return (
-      <PlayersContainer>
-        {
-          players.map(player => (
-            <PlayerBoard key={player.id}>
-              <PlayerDetails player={player} />
-              <TetrisBoard
-                rows={player.board}
-              />
-            </PlayerBoard>
-          ))
-        }
-      </PlayersContainer>
-
-    );
-  };
-
   render() {
+    const { players } = this.props;
+
     return (
       <Container>
         <HeaderContainer>
           <Header>Multiplayer Tetris</Header>
           <Menu />
         </HeaderContainer>
-        {this.renderPlayers()}
+        <PlayersContainer>
+          {
+            players.map(player => (
+              <PlayerBoard
+                key={player.id}
+                player={player}
+              />
+            ))
+          }
+        </PlayersContainer>
       </Container>
     );
   }
@@ -62,8 +46,7 @@ class Game extends React.Component<GamePropType, GameStateType> {
 
 export default connect(
   store => ({
-    started: store.app.started,
     players: store.players.players,
-    isGameOver: store.app.gameOver,
+    status: store.app.status,
   }),
 )(Game);
