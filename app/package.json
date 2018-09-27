@@ -9,17 +9,32 @@
   "dependencies": {
     "react": "16.5.0",
     "react-native": "0.57.1",
+    "react-native-swiper": "^1.5.13",
     "react-navigation": "^2.17.0",
+    "react-navigation-redux-helpers": "^2.0.6",
+    "react-redux": "^5.0.7",
     "redux": "^4.0.0",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "styled-components": "^3.4.9"
   },
   "devDependencies": {
     "@babel/core": "^7.1.0",
     "@babel/runtime": "^7.0.0",
+    "@types/react": "^16.4.14",
+    "@types/react-native": "^0.57.0",
+    "@types/react-navigation": "^2.0.22",
+    "@types/react-redux": "^6.0.9",
+    "@types/redux": "^3.6.0",
     "babel-jest": "23.6.0",
+    "babel-plugin-module-resolver": "^3.1.1",
     "jest": "23.6.0",
     "metro-react-native-babel-preset": "0.47.0",
-    "react-test-renderer": "16.5.0"
+    "prettier": "^1.14.3",
+    "react-test-renderer": "16.5.0",
+    "tslint": "^5.11.0",
+    "tslint-config-prettier": "^1.15.0",
+    "tslint-config-standard": "^8.0.1",
+    "tslint-react": "^3.6.0"
   },
   "jest": {
     "preset": "react-native"
