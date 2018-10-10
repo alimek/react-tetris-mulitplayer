@@ -1,10 +1,13 @@
 import * as React from 'react';
 
-import { Container } from './styles';
+import { Container, Text, Header } from './styles';
+import { Background } from 'components';
 
 interface IAboutPropTypes {
 
 }
+
+const background = require('../../assets/bg2.png');
 
 class About extends React.Component<IAboutPropTypes> {
   static navigationOptions = {
@@ -13,7 +16,16 @@ class About extends React.Component<IAboutPropTypes> {
 
   render() {
     return (
-      <Container/>
+      <Container>
+        <Background
+          source={background}
+        />
+        <Header>About</Header>
+        <Text>GM</Text>
+        <Text>TF</Text>
+        <Text>ES</Text>
+        <Text>DD</Text>
+      </Container>
     );
   }
 }

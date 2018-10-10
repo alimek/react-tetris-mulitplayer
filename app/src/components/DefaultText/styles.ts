@@ -1,3 +1,6 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.Text``;
+export const Container = styled.Text`
+  font-family: 'ArcadeClassic';
+  color: white;
+`;

@@ -1,9 +1,12 @@
 import styled from 'styled-components/native';
 
+import { DefaultText } from 'components';
+
 export const Container = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
+  position: relative;
 `;
 export const FooterLinkContainer = styled.View`
   align-self: flex-end;
@@ -11,17 +14,14 @@ export const FooterLinkContainer = styled.View`
   padding: 10px;
 `;
 
-export const FooterButton = styled.TouchableOpacity`
-  
-`;
-
-export const FooterLinkText = styled.Text`
+export const FooterLinkText = styled(DefaultText)`
   align-self: flex-end;
+  color: white;
 `;
 
 export const Logo = styled.Image`
-  width: 232px;
-  height: 151px;
+  width: 70%;
+  height: 258px;
   margin: 50px 0;
 `;
 
