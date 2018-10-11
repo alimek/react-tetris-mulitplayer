@@ -4,11 +4,11 @@ import styled from 'styled-components/native';
 import { screenHeight, screenWidth } from 'utils/screen';
 import { ImageSourcePropType } from 'react-native';
 
-const Component = styled.Image`
+const Component = styled.ImageBackground`
   width: ${screenWidth}px;
   height: ${screenHeight}px;
   position: absolute;
-  bottom: -100px;
+  bottom: 0;
 `;
 
 interface Props {
@@ -18,6 +18,6 @@ interface Props {
 export default ({ source }: Props): JSX.Element => (
   <Component
     source={source}
-    resizeMode="contain"
+    resizeMode="stretch"
   />
 );

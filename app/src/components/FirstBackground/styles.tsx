@@ -11,7 +11,7 @@ export const Container = styled.View`
 
 export const Mountain = Animated.createAnimatedComponent(styled.Image`
   position: absolute;
-  bottom: 80px;
+  bottom: 145px;
 `);
 
 export const BlackMountain = Animated.createAnimatedComponent(styled.Image`

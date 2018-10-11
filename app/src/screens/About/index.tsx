@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Container, Text, Header } from './styles';
+import { Container, Text } from './styles';
 import { SecondBackground } from 'components';
 import { BackButton } from 'containers';
 
@@ -14,6 +14,12 @@ class About extends React.Component<IAboutPropTypes> {
       backgroundColor: 'transparent',
       borderBottomWidth: 0,
     },
+    title: 'ABOUT',
+    headerTitleStyle: {
+      fontFamily: 'Peepo',
+      fontSize: 25,
+    },
+    headerTintColor: '#fff',
     headerLeft: <BackButton />,
   };
 
@@ -21,7 +27,6 @@ class About extends React.Component<IAboutPropTypes> {
     return (
       <Container>
         <SecondBackground />
-        <Header>About</Header>
         <Text>GM</Text>
         <Text>TF</Text>
         <Text>ES</Text>
