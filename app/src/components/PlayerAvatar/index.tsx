@@ -1,9 +1,10 @@
 import * as React from 'react';
 
 import { Container, Image } from './styles';
+import { PlayerModels } from 'reducers/player';
 
 interface IPlayerAvatarPropTypes {
-  name: 'batman' | 'wiking' | 'cow' | 'ufo' | 'ghost';
+  name: PlayerModels;
 }
 
 const images = {

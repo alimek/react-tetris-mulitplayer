@@ -10,6 +10,7 @@ export const Container = styled.View`
 export const SwiperContainer = styled.View`
   flex: 0.5;
   justify-content: center;
+  padding-bottom: 80px;
 `;
 
 export const Button = styled.TouchableOpacity`

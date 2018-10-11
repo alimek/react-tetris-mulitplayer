@@ -1,5 +1,7 @@
 import * as React from 'react';
 import Carousel from 'react-native-snap-carousel';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 import {
   Container,
@@ -13,21 +15,26 @@ import {
   Input,
   PlayerNameContainer,
 } from './styles';
-import { ThirdBackground, PlayerAvatar } from 'components';
+import { ThirdBackground } from 'components';
+import { PlayerModel, BackButton } from 'containers';
 import { screenHeight } from 'utils/screen';
-import BackButton from 'containers/BackButton';
-import { connect } from 'react-redux';
 import { IStore } from '../../store';
-import { bindActionCreators } from 'redux';
-import { changePlayerName } from 'actions/player';
+import {
+  changePlayerName,
+  changePlayerModel,
+  changeModelIndex,
+} from 'actions/player';
 
 interface ParentProps {
   name: string;
+  model: string | null;
 }
 
 interface DispatchProps {
   actions: {
     changePlayerName: (name: string) => void;
+    changePlayerModel: (model: string) => void;
+    changeModelIndex: (index: number) => void;
   };
 }
 
@@ -67,8 +74,8 @@ class PlayerSelect extends React.Component<Props, State> {
     );
   }
 
-  renderCarouselItem = ({ item }) => {
-    return <PlayerAvatar name={item} />;
+  renderCarouselItem = ({ item, index }) => {
+    return <PlayerModel name={item} index={index} />;
   };
 
   moveUp = () => {
@@ -102,9 +109,7 @@ class PlayerSelect extends React.Component<Props, State> {
           <PlayerText>PLAYER</PlayerText>
         </ControlsContainer>
         <SwiperContainer>
-          <Button
-            onPress={this.moveUp}
-          >
+          <Button onPress={this.moveUp}>
             <ArrowUp source={arrow} />
           </Button>
           {isReady ? (
@@ -125,11 +130,10 @@ class PlayerSelect extends React.Component<Props, State> {
               activeSlideAlignment="center"
               scrollEnabled={false}
               inactiveSlideScale={1}
+              onSnapToItem={actions.changeModelIndex}
             />
           ) : null}
-          <Button
-            onPress={this.moveDown}
-          >
+          <Button onPress={this.moveDown}>
             <ArrowDown source={arrow} />
           </Button>
         </SwiperContainer>
@@ -140,9 +144,13 @@ class PlayerSelect extends React.Component<Props, State> {
 
 export default connect(
   (store: IStore) => ({
+    model: store.player.model,
     name: store.player.name.toUpperCase(),
   }),
   dispatch => ({
-    actions: bindActionCreators({ changePlayerName }, dispatch),
+    actions: bindActionCreators(
+      { changePlayerName, changePlayerModel, changeModelIndex },
+      dispatch,
+    ),
   }),
 )(PlayerSelect);
