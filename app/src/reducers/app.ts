@@ -16,7 +16,7 @@ const initialState = {
 
 export default (store = initialState, action: any = {}) => {
   return produce(store, draft => {
-    switch (action) {
+    switch (action.type) {
       case GAME_TYPE_CHANGED:
         draft.type = action.gameType;
         break;

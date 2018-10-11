@@ -8,11 +8,7 @@ export const Container = styled.View`
 `;
 
 export const SwiperContainer = styled.View`
-  position: absolute;
-  top: 10px;
-  bottom: 80px;
-  right: 60px;
-  width: 60px;
+  flex: 0.5;
   justify-content: center;
 `;
 
@@ -38,17 +34,30 @@ export const ArrowDown = styled(Arrow)``;
 
 export const ControlsContainer = styled.View`
   flex: 1;
-  justify-content: center;
 `;
 
+export const PlayerNameContainer = styled.View`
+  padding: 15px 15px 0 15px;
+`;
 
 export const Text = styled(DefaultText)`
-  font-size: 30px;
+  font-size: 20px;
 `;
 
+export const Input = styled.TextInput`
+  height: 35px;
+  width: 80%;
+  font-size: 24px;
+  border: 2px solid white;
+  padding: 5px;
+  color: white;
+  font-family: 'Peepo';
+`;
 
 export const PlayerText = styled(DefaultText)`
+  position: absolute;
+  right: 25px;
+  top: 50%;
+  margin-top: -35px;
   font-size: 30px;
-  margin-left: 110px;
-  margin-bottom: 20px;
 `;

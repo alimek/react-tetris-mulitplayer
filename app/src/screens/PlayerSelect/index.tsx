@@ -9,21 +9,38 @@ import {
   ArrowUp,
   ControlsContainer,
   PlayerText,
+  Text,
+  Input,
+  PlayerNameContainer,
 } from './styles';
 import { ThirdBackground, PlayerAvatar } from 'components';
 import { screenHeight } from 'utils/screen';
 import BackButton from 'containers/BackButton';
+import { connect } from 'react-redux';
+import { IStore } from '../../store';
+import { bindActionCreators } from 'redux';
+import { changePlayerName } from 'actions/player';
 
-interface IPlayerSelectPropTypes {}
+interface ParentProps {
+  name: string;
+}
+
+interface DispatchProps {
+  actions: {
+    changePlayerName: (name: string) => void;
+  };
+}
 
 interface State {
   isReady: boolean;
 }
 
+type Props = ParentProps & DispatchProps;
+
 const arrow = require('../../assets/arrow1.png');
 const players = ['batman', 'ufo', 'wiking', 'ghost', 'cow'];
 
-class PlayerSelect extends React.Component<IPlayerSelectPropTypes, State> {
+class PlayerSelect extends React.Component<Props, State> {
   static navigationOptions = {
     headerStyle: {
       backgroundColor: 'transparent',
@@ -67,12 +84,22 @@ class PlayerSelect extends React.Component<IPlayerSelectPropTypes, State> {
 
   render() {
     const { isReady } = this.state;
+    const { name, actions } = this.props;
 
     return (
       <Container>
         <ThirdBackground />
         <ControlsContainer>
-          <PlayerText>Player</PlayerText>
+          <PlayerNameContainer>
+            <Text>NAME</Text>
+            <Input
+              value={name}
+              onChangeText={actions.changePlayerName}
+              placeholderTextColor="white"
+              selectionColor="white"
+            />
+          </PlayerNameContainer>
+          <PlayerText>PLAYER</PlayerText>
         </ControlsContainer>
         <SwiperContainer>
           <Button
@@ -111,4 +138,11 @@ class PlayerSelect extends React.Component<IPlayerSelectPropTypes, State> {
   }
 }
 
-export default PlayerSelect;
+export default connect(
+  (store: IStore) => ({
+    name: store.player.name.toUpperCase(),
+  }),
+  dispatch => ({
+    actions: bindActionCreators({ changePlayerName }, dispatch),
+  }),
+)(PlayerSelect);
