@@ -10,8 +10,8 @@ export const Container = styled.View`
 export const SwiperContainer = styled.View`
   position: absolute;
   top: 10px;
-  bottom: 50px;
-  right: 100px;
+  bottom: 80px;
+  right: 60px;
   width: 60px;
   justify-content: center;
 `;
@@ -27,6 +27,7 @@ const Arrow = styled.Image`
   width: 18px;
   height: 14px;
   transform: scale(1.5);
+  margin-left: 10px;
 `;
 
 export const ArrowUp = styled(Arrow)`
@@ -48,5 +49,6 @@ export const Text = styled(DefaultText)`
 
 export const PlayerText = styled(DefaultText)`
   font-size: 30px;
-  margin-left: 20%;
+  margin-left: 110px;
+  margin-bottom: 20px;
 `;

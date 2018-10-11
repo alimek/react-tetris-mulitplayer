@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
 // @ts-ignore
 import packageJson from '../../../package.json';
 
@@ -9,17 +10,27 @@ import {
   MenuContainer,
   Logo,
 } from './styles';
-import { MenuItem, Background } from 'components';
+import { MenuItem, FirstBackground } from 'components';
 import { NavigationScreenProp } from 'react-navigation';
+import { bindActionCreators } from 'redux';
+import { changeGameType } from 'actions/app';
+import { AppType } from 'reducers/app';
 
-interface IHomePropTypes {
+interface ParentTypes {
   navigation: NavigationScreenProp<any, any>;
 }
 
-const logo = require('../../assets/logo.png');
-const background = require('../../assets/bg1.png');
+interface DispatchProps {
+  actions: {
+    changeGameType: (type: string) => void;
+  };
+}
 
-class Home extends React.Component<IHomePropTypes> {
+type Props = ParentTypes & DispatchProps;
+
+const logo = require('../../assets/logo.png');
+
+class Home extends React.Component<Props> {
   static navigationOptions = {
     header: null,
     headerStyle: {
@@ -29,18 +40,28 @@ class Home extends React.Component<IHomePropTypes> {
   };
 
   render() {
-    const { navigation } = this.props;
+    const { navigation, actions } = this.props;
 
     return (
       <Container>
-        <Background
-          source={background}
-        />
+        <FirstBackground />
         <Logo resizeMode="contain" source={logo} />
         <MenuContainer>
-          <MenuItem text="Single" index={1} onPress={() => {}} />
-          <MenuItem text="Multiplayer" index={2} onPress={() => navigation.navigate('PlayerSelect')} />
-          <MenuItem text="About" index={3} onPress={() => navigation.navigate('About')} />
+          <MenuItem
+            text="Single"
+            index={1}
+            onPress={() => actions.changeGameType(AppType.SINGLE)}
+          />
+          <MenuItem
+            text="Multiplayer"
+            index={2}
+            onPress={() => actions.changeGameType(AppType.MULTIPLAYER)}
+          />
+          <MenuItem
+            text="About"
+            index={3}
+            onPress={() => navigation.navigate('About')}
+          />
         </MenuContainer>
         <FooterLinkContainer>
           <FooterLinkText>{`Version  ${packageJson.version}`}</FooterLinkText>
@@ -50,4 +71,9 @@ class Home extends React.Component<IHomePropTypes> {
   }
 }
 
-export default Home;
+export default connect(
+  null,
+  dispatch => ({
+    actions: bindActionCreators({ changeGameType }, dispatch),
+  }),
+)(Home);

@@ -5,11 +5,12 @@ import { createStackNavigator } from 'react-navigation';
 import Menu from 'screens/Menu';
 import About from 'screens/About';
 import PlayerSelect from 'screens/PlayerSelect';
+import SelectPad from 'screens/SelectPad';
 
 const transitionConfig = () => {
   return {
     transitionSpec: {
-      duration: 750,
+      duration: 450,
       easing: Easing.out(Easing.poly(4)),
       timing: Animated.timing,
       useNativeDriver: true,
@@ -44,8 +45,17 @@ export default createStackNavigator(
         gesturesEnabled: false,
       },
     },
+    SelectPad: {
+      screen: SelectPad,
+      navigationOptions: {
+        gesturesEnabled: false,
+      },
+    },
     About: {
       screen: About,
+      navigationOptions: {
+        gesturesEnabled: false,
+      },
     },
   },
   {

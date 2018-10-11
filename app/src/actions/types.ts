@@ -1,0 +1,1 @@
+export const GAME_TYPE_CHANGED = 'tetris.game.type.changed';

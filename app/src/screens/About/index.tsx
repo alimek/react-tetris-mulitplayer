@@ -1,25 +1,26 @@
 import * as React from 'react';
 
 import { Container, Text, Header } from './styles';
-import { Background } from 'components';
+import { SecondBackground } from 'components';
+import { BackButton } from 'containers';
 
 interface IAboutPropTypes {
 
 }
 
-const background = require('../../assets/bg2.png');
-
 class About extends React.Component<IAboutPropTypes> {
   static navigationOptions = {
-    header: null,
+    headerStyle: {
+      backgroundColor: 'transparent',
+      borderBottomWidth: 0,
+    },
+    headerLeft: <BackButton />,
   };
 
   render() {
     return (
       <Container>
-        <Background
-          source={background}
-        />
+        <SecondBackground />
         <Header>About</Header>
         <Text>GM</Text>
         <Text>TF</Text>

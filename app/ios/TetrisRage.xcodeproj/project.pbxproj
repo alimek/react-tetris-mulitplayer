@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1312452D216E7D2A00998926 /* arcadeclassic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1312452C216E7D2A00998926 /* arcadeclassic.ttf */; };
+		13A66D3B216FC84600C90C47 /* Peepo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 13A66D3A216FC84600C90C47 /* Peepo.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
@@ -20,6 +21,7 @@
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* TetrisRageTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TetrisRageTests.m; sourceTree = "<group>"; };
 		1312452C216E7D2A00998926 /* arcadeclassic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = arcadeclassic.ttf; sourceTree = SOURCE_ROOT; };
+		13A66D3A216FC84600C90C47 /* Peepo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Peepo.ttf; sourceTree = SOURCE_ROOT; };
 		13B07F961A680F5B00A75B9A /* TetrisRage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TetrisRage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = TetrisRage/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = TetrisRage/AppDelegate.m; sourceTree = "<group>"; };
@@ -65,6 +67,7 @@
 		1312452B216E7D1800998926 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				13A66D3A216FC84600C90C47 /* Peepo.ttf */,
 				1312452C216E7D2A00998926 /* arcadeclassic.ttf */,
 			);
 			path = Resources;
@@ -194,6 +197,7 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				1312452D216E7D2A00998926 /* arcadeclassic.ttf in Resources */,
+				13A66D3B216FC84600C90C47 /* Peepo.ttf in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

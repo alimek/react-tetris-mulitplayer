@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware } from 'redux';
+import { createStore as reduxCreateStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import {
   createReactNavigationReduxMiddleware,
@@ -19,9 +19,19 @@ const middleware = createReactNavigationReduxMiddleware(
   (state: IStore) => state.nav,
 );
 
-const store = createStore(
+let Reactotron: any = null;
+
+if (__DEV__) {
+  require('reactotron-react-native');
+  Reactotron = require('./reactotron').default;
+}
+
+const createStore = Reactotron === null
+  ? reduxCreateStore
+  : Reactotron.createStore;
+
+// @ts-ignore
+export default createStore(
   reducers,
   applyMiddleware(ReduxThunk, middleware),
 );
-
-export default store;

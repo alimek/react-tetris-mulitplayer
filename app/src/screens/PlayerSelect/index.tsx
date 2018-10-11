@@ -8,11 +8,11 @@ import {
   ArrowDown,
   ArrowUp,
   ControlsContainer,
-  Text,
   PlayerText,
 } from './styles';
-import { Background, PlayerAvatar } from 'components';
+import { ThirdBackground, PlayerAvatar } from 'components';
 import { screenHeight } from 'utils/screen';
+import BackButton from 'containers/BackButton';
 
 interface IPlayerSelectPropTypes {}
 
@@ -20,7 +20,6 @@ interface State {
   isReady: boolean;
 }
 
-const background = require('../../assets/bg2.png');
 const arrow = require('../../assets/arrow1.png');
 const players = ['batman', 'ufo', 'wiking', 'ghost', 'cow'];
 
@@ -31,6 +30,7 @@ class PlayerSelect extends React.Component<IPlayerSelectPropTypes, State> {
       borderBottomWidth: 0,
     },
     headerTintColor: '#fff',
+    headerLeft: <BackButton />,
   };
   carousel: any;
 
@@ -70,7 +70,7 @@ class PlayerSelect extends React.Component<IPlayerSelectPropTypes, State> {
 
     return (
       <Container>
-        <Background source={background} />
+        <ThirdBackground />
         <ControlsContainer>
           <PlayerText>Player</PlayerText>
         </ControlsContainer>
@@ -97,7 +97,7 @@ class PlayerSelect extends React.Component<IPlayerSelectPropTypes, State> {
               enableSnap={false}
               activeSlideAlignment="center"
               scrollEnabled={false}
-              inactiveSlideScale={0.5}
+              inactiveSlideScale={1}
             />
           ) : null}
           <Button
