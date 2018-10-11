@@ -112,11 +112,12 @@ class FirstBackground extends React.Component<Props, State> {
         <BlackMountain
           source={mountainBlack}
           style={{
+            opacity: 0.7,
             transform: [
               {
                 translateX: animationLeftRight.interpolate({
                   inputRange: [0, 0.5, 1],
-                  outputRange: [-200, -180, -160],
+                  outputRange: [-130, -120, -110],
                 })
               },
               {
