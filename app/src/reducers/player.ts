@@ -1,5 +1,5 @@
 import { produce } from 'immer';
-import { PLAYER_MODEL_CHANGED, PLAYER_MODEL_INDEX_CHANGED, PLAYER_NAME_CHANGED } from 'actions/types';
+import { PLAYER_MODEL_CHANGED, PLAYER_MODEL_INDEX_CHANGED, PLAYER_NAME_CHANGED, PLAYER_PAD_CHANGED } from 'actions/types';
 
 export enum PlayerModels {
   BATMAN = 'batman',
@@ -9,16 +9,24 @@ export enum PlayerModels {
   GHOST = 'ghost',
 }
 
+export enum PlayerPad {
+  ONE = 'pad',
+  TWO = 'pad2',
+  THREE = 'new-pad',
+}
+
 export interface IPlayerStore {
   name: string;
   model: PlayerModels | null;
   currentIndex: number;
+  pad: PlayerPad | null;
 }
 
 const initialState: IPlayerStore = {
   name: '',
   model: null,
   currentIndex: 2,
+  pad: null,
 };
 
 export default (state = initialState, action: any = {}) => {
@@ -32,6 +40,9 @@ export default (state = initialState, action: any = {}) => {
         break;
       case PLAYER_MODEL_INDEX_CHANGED:
         draft.currentIndex = action.index;
+        break;
+      case PLAYER_PAD_CHANGED:
+        draft.pad = action.pad;
         break;
     }
   });

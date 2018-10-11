@@ -10,7 +10,6 @@ import {
   ArrowDown,
   ArrowUp,
   ControlsContainer,
-  PlayerText,
   Text,
   Input,
   PlayerNameContainer,
@@ -52,6 +51,11 @@ class PlayerSelect extends React.Component<Props, State> {
     headerStyle: {
       backgroundColor: 'transparent',
       borderBottomWidth: 0,
+    },
+    title: 'PLAYER',
+    headerTitleStyle: {
+      fontFamily: 'Peepo',
+      fontSize: 25,
     },
     headerTintColor: '#fff',
     headerLeft: <BackButton />,
@@ -106,7 +110,6 @@ class PlayerSelect extends React.Component<Props, State> {
               selectionColor="white"
             />
           </PlayerNameContainer>
-          <PlayerText>PLAYER</PlayerText>
         </ControlsContainer>
         <SwiperContainer>
           <Button onPress={this.moveUp}>

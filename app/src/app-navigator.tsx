@@ -6,6 +6,7 @@ import Menu from 'screens/Menu';
 import About from 'screens/About';
 import PlayerSelect from 'screens/PlayerSelect';
 import SelectPad from 'screens/SelectPad';
+import Game from 'screens/Game';
 
 const transitionConfig = () => {
   return {
@@ -47,6 +48,12 @@ export default createStackNavigator(
     },
     SelectPad: {
       screen: SelectPad,
+      navigationOptions: {
+        gesturesEnabled: false,
+      },
+    },
+    Game: {
+      screen: Game,
       navigationOptions: {
         gesturesEnabled: false,
       },

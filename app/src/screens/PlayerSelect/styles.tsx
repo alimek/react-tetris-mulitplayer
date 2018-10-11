@@ -54,11 +54,3 @@ export const Input = styled.TextInput`
   color: white;
   font-family: 'Peepo';
 `;
-
-export const PlayerText = styled(DefaultText)`
-  position: absolute;
-  right: 25px;
-  top: 50%;
-  margin-top: -35px;
-  font-size: 30px;
-`;
