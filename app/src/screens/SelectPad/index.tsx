@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { Container, PadBackground, PadsContainer } from './styles';
-import { FourthBackground, PadOne, PadThree, PadTwo } from 'components';
+import { FourthBackground, PadOne, PadThree, PadTwo, Page } from 'components';
 import { BackButton } from 'containers';
 import { changePlayerPad } from 'actions/player';
 import { PlayerPad } from 'reducers/player';
@@ -50,20 +50,22 @@ class SelectPad extends React.Component<Props> {
     const { actions } = this.props;
 
     return (
-      <Container>
-        <FourthBackground />
-        <PadsContainer>
-          {pads.map((pad, index) => (
-            <PadBackground
-              key={index}
-              activeOpacity={0.9}
-              onPress={() => actions.changePlayerPad(pad.name)}
-            >
-              <pad.component />
-            </PadBackground>
-          ))}
-        </PadsContainer>
-      </Container>
+      <Page hasHeader title="SELECT PAD" showBackButton>
+        <Container>
+          <FourthBackground />
+          <PadsContainer>
+            {pads.map((pad, index) => (
+              <PadBackground
+                key={index}
+                activeOpacity={0.9}
+                onPress={() => actions.changePlayerPad(pad.name)}
+              >
+                <pad.component />
+              </PadBackground>
+            ))}
+          </PadsContainer>
+        </Container>
+      </Page>
     );
   }
 }

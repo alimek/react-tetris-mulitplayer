@@ -115,7 +115,7 @@ class FirstBackground extends React.Component<Props, State> {
               {
                 translateX: animationLeftRight.interpolate({
                   inputRange: [0, 0.5, 1],
-                  outputRange: [100, 80, 60],
+                  outputRange: [-100, -80, -50],
                 })
               },
               {

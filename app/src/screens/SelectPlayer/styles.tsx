@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 import DefaultText from 'components/DefaultText';
+import { isiPhoneX } from 'utils/platform';
 
 export const Container = styled.View`
   flex: 1;
@@ -10,7 +11,7 @@ export const Container = styled.View`
 export const SwiperContainer = styled.View`
   flex: 0.5;
   justify-content: center;
-  padding-bottom: 80px;
+  padding-bottom: 110px;
 `;
 
 export const Button = styled.TouchableOpacity`
@@ -24,7 +25,7 @@ const Arrow = styled.Image`
   width: 18px;
   height: 14px;
   transform: scale(1.5);
-  margin-left: 10px;
+  margin-left: 60px;
 `;
 
 export const ArrowUp = styled(Arrow)`
@@ -53,4 +54,11 @@ export const Input = styled.TextInput`
   padding: 5px;
   color: white;
   font-family: 'Peepo';
+`;
+
+export const PlayerBackgroundPosition = styled.View`
+  position: absolute;
+  top: 50%;
+  margin-top: -${isiPhoneX() ? 15 : 95/2}px;
+  right: 25px;
 `;

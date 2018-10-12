@@ -9,6 +9,10 @@ import PlayerAvatar from './PlayerAvatar';
 import PadOne from './PadOne';
 import PadTwo from './PadTwo';
 import PadThree from './PadThree';
+import SkyBackground from './SkyBackground';
+import Page from './Page';
+import PlayerBackground from './PlayerBackground';
+import Input from './Input';
 
 export {
   MenuItem,
@@ -22,4 +26,8 @@ export {
   PadOne,
   PadTwo,
   PadThree,
+  SkyBackground,
+  Page,
+  PlayerBackground,
+  Input,
 };

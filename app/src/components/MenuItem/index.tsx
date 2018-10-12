@@ -117,7 +117,7 @@ class MenuItem extends React.Component<IMenuItemPropTypes, State> {
 
     return (
       <Container>
-        <Touchable activeOpacity={1} onPress={this.onPress}>
+        <Touchable activeOpacity={1} onPress={this.onPress} disabled={showArrows}>
           {showArrows ? (
             <ArrowLeft
               source={arrow}
@@ -125,6 +125,7 @@ class MenuItem extends React.Component<IMenuItemPropTypes, State> {
             />
           ) : null}
           <Text
+            clicked={showArrows}
             style={{
               opacity,
             }}

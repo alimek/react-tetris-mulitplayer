@@ -1,5 +1,9 @@
 import { produce } from 'immer';
-import { PLAYER_MODEL_CHANGED, PLAYER_MODEL_INDEX_CHANGED, PLAYER_NAME_CHANGED, PLAYER_PAD_CHANGED } from 'actions/types';
+import {
+  PLAYER_MODEL_INDEX_CHANGED,
+  PLAYER_NAME_CHANGED,
+  PLAYER_PAD_CHANGED,
+} from 'actions/types';
 
 export enum PlayerModels {
   BATMAN = 'batman',
@@ -22,9 +26,11 @@ export interface IPlayerStore {
   pad: PlayerPad | null;
 }
 
+export const players = ['batman', 'ufo', 'wiking', 'ghost', 'cow'];
+
 const initialState: IPlayerStore = {
   name: '',
-  model: null,
+  model: PlayerModels.WIKING,
   currentIndex: 2,
   pad: null,
 };
@@ -35,11 +41,9 @@ export default (state = initialState, action: any = {}) => {
       case PLAYER_NAME_CHANGED:
         draft.name = action.name;
         break;
-      case PLAYER_MODEL_CHANGED:
-        draft.model = action.model;
-        break;
       case PLAYER_MODEL_INDEX_CHANGED:
         draft.currentIndex = action.index;
+        draft.model = action.model;
         break;
       case PLAYER_PAD_CHANGED:
         draft.pad = action.pad;

@@ -1,5 +1,9 @@
-import { GAME_TYPE_CHANGED } from 'actions/types';
-import { NavigationActions } from 'react-navigation';
+import {
+  GAME_TYPE_CHANGED,
+  SWIPER_INDEX_DECREMENT,
+  SWIPER_INDEX_INCREMENT,
+} from 'actions/types';
+import { moveNext } from 'utils/swiper';
 
 export const changeGameType = (type: string) => dispatch => {
   dispatch({
@@ -7,7 +11,13 @@ export const changeGameType = (type: string) => dispatch => {
     gameType: type,
   });
 
-  dispatch(NavigationActions.navigate({
-    routeName: 'PlayerSelect',
-  }));
+  moveNext();
 };
+
+export const incrementIndex = () => ({
+  type: SWIPER_INDEX_INCREMENT,
+});
+
+export const decrementIndex = () => ({
+  type: SWIPER_INDEX_DECREMENT,
+});

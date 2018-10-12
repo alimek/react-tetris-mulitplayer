@@ -11,13 +11,12 @@ import {
   Logo,
 } from './styles';
 import { MenuItem, FirstBackground } from 'components';
-import { NavigationScreenProp } from 'react-navigation';
 import { bindActionCreators } from 'redux';
 import { changeGameType } from 'actions/app';
 import { AppType } from 'reducers/app';
+import { moveNext } from 'utils/swiper';
 
 interface ParentTypes {
-  navigation: NavigationScreenProp<any, any>;
 }
 
 interface DispatchProps {
@@ -40,7 +39,7 @@ class Home extends React.Component<Props> {
   };
 
   render() {
-    const { navigation, actions } = this.props;
+    const { actions } = this.props;
 
     return (
       <Container>
@@ -60,7 +59,7 @@ class Home extends React.Component<Props> {
           <MenuItem
             text="About"
             index={3}
-            onPress={() => navigation.navigate('About')}
+            onPress={() => moveNext()}
           />
         </MenuContainer>
         <FooterLinkContainer>

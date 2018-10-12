@@ -4,9 +4,7 @@ import { Container, Text } from './styles';
 import { SecondBackground } from 'components';
 import { BackButton } from 'containers';
 
-interface IAboutPropTypes {
-
-}
+interface IAboutPropTypes {}
 
 class About extends React.Component<IAboutPropTypes> {
   static navigationOptions = {
@@ -14,6 +12,7 @@ class About extends React.Component<IAboutPropTypes> {
       backgroundColor: 'transparent',
       borderBottomWidth: 0,
     },
+    headerTransparent: true,
     title: 'ABOUT',
     headerTitleStyle: {
       fontFamily: 'Peepo',

@@ -23,6 +23,7 @@ export const Logo = styled.Image`
   width: 70%;
   height: 258px;
   margin: 50px 0;
+  align-self: center;
 `;
 
 export const MenuContainer = styled.View`

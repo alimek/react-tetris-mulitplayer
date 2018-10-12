@@ -279,7 +279,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.pgs.tetris-rage";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.pgs-soft.tetris";
 				PRODUCT_NAME = TetrisRage;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -299,7 +299,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.pgs.tetris-rage";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.pgs-soft.tetris";
 				PRODUCT_NAME = TetrisRage;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

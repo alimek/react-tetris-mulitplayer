@@ -1,8 +1,5 @@
 import { createStore as reduxCreateStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
-import {
-  createReactNavigationReduxMiddleware,
-} from 'react-navigation-redux-helpers';
 
 import reducers from './reducers';
 import { IPlayerStore } from 'reducers/player';
@@ -14,10 +11,6 @@ export interface IStore {
   app: IAppStore;
 }
 
-const middleware = createReactNavigationReduxMiddleware(
-  "root",
-  (state: IStore) => state.nav,
-);
 
 let Reactotron: any = null;
 
@@ -33,5 +26,5 @@ const createStore = Reactotron === null
 // @ts-ignore
 export default createStore(
   reducers,
-  applyMiddleware(ReduxThunk, middleware),
+  applyMiddleware(ReduxThunk),
 );

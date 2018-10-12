@@ -24,10 +24,10 @@ export const ArrowRight = styled(Arrow)`
   transform: rotate(90deg);
 `;
 
-export const Text = Animated.createAnimatedComponent(styled.Text`
+export const Text = Animated.createAnimatedComponent(styled.Text<{clicked: boolean}>`
   font-size: 35px;
   text-align: center;
-  color: white;
+  color: ${props => props.clicked ? 'rgb(209, 73, 116)' : 'white'};
   margin: 0 10px;
   font-family: 'ArcadeClassic';
 `);
