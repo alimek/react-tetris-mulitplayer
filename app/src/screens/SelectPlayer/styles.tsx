@@ -59,6 +59,6 @@ export const Input = styled.TextInput`
 export const PlayerBackgroundPosition = styled.View`
   position: absolute;
   top: 50%;
-  margin-top: -${isiPhoneX() ? 15 : 95/2}px;
+  margin-top: -${isiPhoneX() ? 25 : 95/2}px;
   right: 25px;
 `;

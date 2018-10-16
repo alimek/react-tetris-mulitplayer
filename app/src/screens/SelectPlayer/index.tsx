@@ -94,6 +94,7 @@ class PlayerSelect extends React.Component<Props, State> {
               <Input
                 value={name}
                 onChangeText={actions.changePlayerName}
+                returnKeyType="done"
               />
             </PlayerNameContainer>
           </ControlsContainer>

@@ -10,9 +10,9 @@
 		1312452D216E7D2A00998926 /* arcadeclassic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1312452C216E7D2A00998926 /* arcadeclassic.ttf */; };
 		13A66D3B216FC84600C90C47 /* Peepo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 13A66D3A216FC84600C90C47 /* Peepo.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
-		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		13E3122D2171596300FAEA4B /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13E3122C2171596300FAEA4B /* View.xib */; };
 		D467942F31851B73168DF64C /* libPods-TetrisRage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D5774032DDA03BC8B63C5EC2 /* libPods-TetrisRage.a */; };
 /* End PBXBuildFile section */
 
@@ -25,10 +25,10 @@
 		13B07F961A680F5B00A75B9A /* TetrisRage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TetrisRage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = TetrisRage/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = TetrisRage/AppDelegate.m; sourceTree = "<group>"; };
-		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = TetrisRage/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = TetrisRage/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = TetrisRage/main.m; sourceTree = "<group>"; };
+		13E3122C2171596300FAEA4B /* View.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
 		230F6D309AF3D4FFCEDE41BE /* Pods-TetrisRage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TetrisRage.release.xcconfig"; path = "Pods/Target Support Files/Pods-TetrisRage/Pods-TetrisRage.release.xcconfig"; sourceTree = "<group>"; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		92D0B774F0528D12426A7868 /* Pods-TetrisRage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TetrisRage.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TetrisRage/Pods-TetrisRage.debug.xcconfig"; sourceTree = "<group>"; };
@@ -81,8 +81,8 @@
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
-				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				13E3122C2171596300FAEA4B /* View.xib */,
 			);
 			name = TetrisRage;
 			sourceTree = "<group>";
@@ -169,6 +169,7 @@
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 36CHZQXF4C;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -195,10 +196,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13E3122D2171596300FAEA4B /* View.xib in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				1312452D216E7D2A00998926 /* arcadeclassic.ttf in Resources */,
 				13A66D3B216FC84600C90C47 /* Peepo.ttf in Resources */,
-				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,24 +252,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXVariantGroup section */
-		13B07FB11A68108700A75B9A /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				13B07FB21A68108700A75B9A /* Base */,
-			);
-			name = LaunchScreen.xib;
-			path = TetrisRage;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 92D0B774F0528D12426A7868 /* Pods-TetrisRage.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 36CHZQXF4C;
@@ -281,6 +272,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pgs-soft.tetris";
 				PRODUCT_NAME = TetrisRage;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -290,6 +282,8 @@
 			baseConfigurationReference = 230F6D309AF3D4FFCEDE41BE /* Pods-TetrisRage.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 36CHZQXF4C;
 				INFOPLIST_FILE = TetrisRage/Info.plist;
@@ -301,6 +295,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pgs-soft.tetris";
 				PRODUCT_NAME = TetrisRage;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

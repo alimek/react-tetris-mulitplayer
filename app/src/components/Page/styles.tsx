@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 import DefaultText from 'components/DefaultText';
 import { isiPhoneX } from 'utils/platform';
 
-const HEADER_HEIGHT = isiPhoneX() ? 130 : 70;
+const HEADER_HEIGHT = isiPhoneX() ? 110 : 70;
 
 export const Container = styled.View`
   flex: 1;
@@ -13,7 +13,7 @@ export const HeaderContainer = styled.View`
   flex-direction: row;
   height: ${HEADER_HEIGHT}px;
   width: 100%;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   position: absolute;
   top: 0;
