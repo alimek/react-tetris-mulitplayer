@@ -1,5 +1,6 @@
 import { produce } from 'immer';
 import {
+  PLAYER_IS_READY,
   PLAYER_MODEL_INDEX_CHANGED,
   PLAYER_NAME_CHANGED,
   PLAYER_PAD_CHANGED, PLAYER_SCORE_UP,
@@ -31,6 +32,7 @@ export interface IPlayerStore {
   pad: PlayerPad | null;
   score: number;
   status: PlayerStatus,
+  isReady: boolean;
 }
 
 export const players = ['batman', 'ufo', 'wiking', 'ghost', 'cow'];
@@ -42,6 +44,7 @@ const initialState: IPlayerStore = {
   pad: null,
   score: 0,
   status: PlayerStatus.NOT_READY,
+  isReady: false,
 };
 
 export default (state = initialState, action: any = {}) => {
@@ -59,6 +62,10 @@ export default (state = initialState, action: any = {}) => {
         break;
       case PLAYER_SCORE_UP:
         draft.score += action.points;
+        break;
+      case PLAYER_IS_READY:
+        draft.isReady = true;
+        break;
     }
   });
 };

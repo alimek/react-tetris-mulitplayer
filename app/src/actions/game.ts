@@ -1,26 +1,27 @@
 import {
-  GAME_END,
-  GAME_OVER,
   GAME_BOARD_APPLY_BLOCK,
   GAME_BOARD_MOVE_DOWN,
   GAME_BOARD_MOVE_LEFT,
   GAME_BOARD_MOVE_RIGHT,
   GAME_BOARD_ROTATE_BLOCK,
   GAME_BOARD_UPDATE,
+  GAME_END,
+  GAME_OVER,
 } from './types';
-import {
-  applyPiece,
-  hasConflict,
-  rotateBlockLeft,
-  rotateBlockRight,
-  killRows,
-} from 'utils/game-board';
+import { applyPiece, hasConflict, killRows, rotateBlockLeft, rotateBlockRight, } from 'utils/game-board';
 import { IGameStore } from 'reducers/game';
 import { startGame, stopGame } from 'utils/game';
 import { COL_NUMBER } from 'constants/game';
-import { scoreUp } from 'actions/player';
+import { scoreUp, setPlayerReady } from 'actions/player';
+import { AppType, IAppStore } from 'reducers/app';
 
-export const start = () => () => {
+export const start = () => (dispatch, getState) => {
+  const { app }: { app: IAppStore } = getState();
+
+  if (app.type === AppType.SINGLE) {
+    dispatch(setPlayerReady());
+  }
+
   startGame();
 };
 

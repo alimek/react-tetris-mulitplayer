@@ -3,6 +3,7 @@ import {
   PLAYER_NAME_CHANGED,
   PLAYER_MODEL_INDEX_CHANGED,
   PLAYER_PAD_CHANGED,
+  PLAYER_IS_READY,
 } from 'actions/types';
 import { moveNext } from 'utils/swiper';
 import { players } from 'reducers/player';
@@ -34,3 +35,7 @@ export const changePlayerPad = (pad: string) => dispatch => {
 };
 
 export const scoreUp = (points: number) => ({ type: PLAYER_SCORE_UP, points });
+
+export const setPlayerReady = () => ({
+  type: PLAYER_IS_READY,
+});

@@ -43,22 +43,6 @@ class GameBoard extends React.PureComponent<Props> {
     props.actions.start();
   }
 
-  // tick = () => {
-  //   // check if next block hit wall at beginning
-  //   // if not, nextBlock = current and generate next one
-  //   if (!intersects(newRows, nextBlock, 0, COL_NUMBER / 2 - 2)) {
-  //     console.log('ustawiam nowy klocek', nextBlock);
-  //     this.setState({
-  //       currentBlock: nextBlock,
-  //       pieceY: 0,
-  //       pieceX: COL_NUMBER / 2 - 2,
-  //       nextBlock: getRandomBlock(),
-  //     });
-  //
-  //     return true;
-  //   }
-  // };
-
   // addExtraLine = (amount: number): number[][] => {
   //   const newRows = addLine(this.state.rows, amount);
   //
@@ -72,6 +56,10 @@ class GameBoard extends React.PureComponent<Props> {
 
   render() {
     const { nextBlock, actions, gameStatus, player } = this.props;
+
+    if (!player.isReady) {
+      return null;
+    }
 
     const Pad: any = pads[player.pad || PlayerPad.ONE];
 
@@ -91,6 +79,7 @@ class GameBoard extends React.PureComponent<Props> {
         {Pad ? (
           <PadContainer>
             <Pad
+              isClickable
               style={{
                 transform: [
                   {
