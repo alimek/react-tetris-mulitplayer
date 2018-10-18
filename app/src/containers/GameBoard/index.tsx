@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 
 import { Container, GameContainer, UserDetailsContainer, Label } from './styles';
 import { Block, PadOne, PadThree, PadTwo } from 'components';
-import { GameOverModal, TetrisBoard } from 'containers';
+import { GameOverModal, TetrisBoard, PlayerNotReady } from 'containers';
 import { moveDown, moveLeft, moveRight, rotateLeft, rotateRight, start, } from 'actions/game';
 import { IPlayerStore, PlayerPad } from 'reducers/player';
 import { IStore } from '../../store';
@@ -40,6 +40,7 @@ type Props = ParentProps & DispatchProps;
 class GameBoard extends React.PureComponent<Props> {
   constructor(props) {
     super(props);
+
     props.actions.start();
   }
 
@@ -58,7 +59,7 @@ class GameBoard extends React.PureComponent<Props> {
     const { nextBlock, actions, gameStatus, player } = this.props;
 
     if (!player.isReady) {
-      return null;
+      return <PlayerNotReady />;
     }
 
     const Pad: any = pads[player.pad || PlayerPad.ONE];

@@ -4,6 +4,7 @@ import {
   PLAYER_MODEL_INDEX_CHANGED,
   PLAYER_PAD_CHANGED,
   PLAYER_IS_READY,
+  PLAYER_IS_NOT_READY,
 } from 'actions/types';
 import { moveNext } from 'utils/swiper';
 import { players } from 'reducers/player';
@@ -38,4 +39,8 @@ export const scoreUp = (points: number) => ({ type: PLAYER_SCORE_UP, points });
 
 export const setPlayerReady = () => ({
   type: PLAYER_IS_READY,
+});
+
+export const setPlayerNotReady = () => ({
+  type: PLAYER_IS_NOT_READY,
 });

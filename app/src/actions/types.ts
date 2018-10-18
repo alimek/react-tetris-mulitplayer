@@ -10,6 +10,7 @@ export const PLAYER_PAD_CHANGED = 'tetris.player.pad.changed';
 export const PLAYER_SCORE_UP = 'tetris.player.score_up';
 
 export const PLAYER_IS_READY = 'tetris.player.is_ready';
+export const PLAYER_IS_NOT_READY = 'tetris.player.is_not_ready';
 
 
 export const GAME_BOARD_APPLY_BLOCK = 'tetris.game.board.block.apply';

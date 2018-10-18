@@ -4,12 +4,20 @@ import {
   SWIPER_INDEX_INCREMENT,
 } from 'actions/types';
 import { moveNext } from 'utils/swiper';
+import { AppType } from 'reducers/app';
+import { setPlayerNotReady, setPlayerReady } from 'actions/player';
 
 export const changeGameType = (type: string) => dispatch => {
   dispatch({
     type: GAME_TYPE_CHANGED,
     gameType: type,
   });
+
+  if (type === AppType.SINGLE) {
+    dispatch(setPlayerReady());
+  } else {
+    dispatch(setPlayerNotReady());
+  }
 
   moveNext();
 };

@@ -5,6 +5,7 @@ import PlayerModel from './PlayerModel';
 import GameBoard from './GameBoard';
 import GameOverModal from './GameOverModal';
 import TetrisBoard from './TetrisBoard';
+import PlayerNotReady from './PlayerNotReady';
 
 export {
   Game,
@@ -14,4 +15,5 @@ export {
   GameBoard,
   GameOverModal,
   TetrisBoard,
+  PlayerNotReady,
 };

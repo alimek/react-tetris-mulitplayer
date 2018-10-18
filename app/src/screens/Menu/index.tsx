@@ -52,6 +52,11 @@ class Home extends React.Component<Props> {
             onPress={() => actions.changeGameType(AppType.SINGLE)}
           />
           <MenuItem
+            text="Multiplayer"
+            index={2}
+            onPress={() => actions.changeGameType(AppType.MULTIPLAYER)}
+          />
+          <MenuItem
             text="About"
             index={3}
             onPress={() => moveNext()}
@@ -71,9 +76,3 @@ export default connect(
     actions: bindActionCreators({ changeGameType }, dispatch),
   }),
 )(Home);
-
-// <MenuItem
-//   text="Multiplayer"
-//   index={2}
-//   onPress={() => actions.changeGameType(AppType.MULTIPLAYER)}
-// />

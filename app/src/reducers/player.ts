@@ -1,5 +1,6 @@
 import { produce } from 'immer';
 import {
+  PLAYER_IS_NOT_READY,
   PLAYER_IS_READY,
   PLAYER_MODEL_INDEX_CHANGED,
   PLAYER_NAME_CHANGED,
@@ -20,18 +21,12 @@ export enum PlayerPad {
   THREE = 'new-pad',
 }
 
-export enum PlayerStatus {
-  READY = 'ready',
-  NOT_READY = 'not-ready',
-}
-
 export interface IPlayerStore {
   name: string;
   model: PlayerModels | null;
   currentIndex: number;
   pad: PlayerPad | null;
   score: number;
-  status: PlayerStatus,
   isReady: boolean;
 }
 
@@ -43,7 +38,6 @@ const initialState: IPlayerStore = {
   currentIndex: 2,
   pad: null,
   score: 0,
-  status: PlayerStatus.NOT_READY,
   isReady: false,
 };
 
@@ -65,6 +59,9 @@ export default (state = initialState, action: any = {}) => {
         break;
       case PLAYER_IS_READY:
         draft.isReady = true;
+        break;
+      case PLAYER_IS_NOT_READY:
+        draft.isReady = false;
         break;
     }
   });

@@ -4,30 +4,32 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import {
-  Container,
-  SwiperContainer,
-  Button,
   ArrowDown,
   ArrowUp,
+  Button,
+  Container,
   ControlsContainer,
-  Text,
-  PlayerNameContainer,
   PlayerBackgroundPosition,
+  PlayerNameContainer,
+  SwiperContainer,
+  Text,
 } from './styles';
-import { ThirdBackground, Page, PlayerBackground, Input } from 'components';
+import { Input, Page, PlayerBackground, ThirdBackground } from 'components';
 import { PlayerModel } from 'containers';
 import { screenHeight } from 'utils/screen';
 import { IStore } from '../../store';
 import {
-  changePlayerName,
-  changePlayerModel,
   changeModelIndex,
+  changePlayerModel,
+  changePlayerName,
 } from 'actions/player';
 import { players } from 'reducers/player';
+import { AppType } from 'reducers/app';
 
 interface ParentProps {
   name: string;
   model: string | null;
+  appMode: AppType | null;
 }
 
 interface DispatchProps {
@@ -82,21 +84,23 @@ class PlayerSelect extends React.Component<Props, State> {
 
   render() {
     const { isReady } = this.state;
-    const { name, actions, model } = this.props;
+    const { name, actions, model, appMode } = this.props;
 
     return (
       <Page hasHeader showBackButton title="PLAYER">
         <Container>
           <ThirdBackground />
           <ControlsContainer>
-            <PlayerNameContainer>
-              <Text>NAME</Text>
-              <Input
-                value={name}
-                onChangeText={actions.changePlayerName}
-                returnKeyType="done"
-              />
-            </PlayerNameContainer>
+            {!appMode || appMode !== AppType.SINGLE ? (
+              <PlayerNameContainer>
+                <Text>NAME</Text>
+                <Input
+                  value={name}
+                  onChangeText={actions.changePlayerName}
+                  returnKeyType="done"
+                />
+              </PlayerNameContainer>
+            ) : null}
           </ControlsContainer>
           <SwiperContainer>
             <Button onPress={this.moveUp}>
@@ -142,6 +146,7 @@ class PlayerSelect extends React.Component<Props, State> {
 export default connect(
   (store: IStore) => ({
     model: store.player.model,
+    appMode: store.app.type,
     name: store.player.name.toUpperCase(),
   }),
   dispatch => ({

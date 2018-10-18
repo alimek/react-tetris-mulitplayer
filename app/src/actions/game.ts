@@ -12,17 +12,15 @@ import { applyPiece, hasConflict, killRows, rotateBlockLeft, rotateBlockRight, }
 import { IGameStore } from 'reducers/game';
 import { startGame, stopGame } from 'utils/game';
 import { COL_NUMBER } from 'constants/game';
-import { scoreUp, setPlayerReady } from 'actions/player';
-import { AppType, IAppStore } from 'reducers/app';
+import { scoreUp } from 'actions/player';
+import { IPlayerStore } from 'reducers/player';
 
 export const start = () => (dispatch, getState) => {
-  const { app }: { app: IAppStore } = getState();
+  const { player }: { player: IPlayerStore } = getState();
 
-  if (app.type === AppType.SINGLE) {
-    dispatch(setPlayerReady());
+  if (player.isReady) {
+    startGame();
   }
-
-  startGame();
 };
 
 export const onTick = () => (dispatch, getState) => {
