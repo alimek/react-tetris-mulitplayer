@@ -13,6 +13,8 @@ import SkyBackground from './SkyBackground';
 import Page from './Page';
 import PlayerBackground from './PlayerBackground';
 import Input from './Input';
+import Board from './Board';
+import Block from './Block';
 
 export {
   MenuItem,
@@ -30,4 +32,6 @@ export {
   Page,
   PlayerBackground,
   Input,
+  Board,
+  Block,
 };

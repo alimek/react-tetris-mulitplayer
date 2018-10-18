@@ -23,6 +23,7 @@
       "screens/*": ["screens/*"],
       "reducers/*": ["reducers/*"],
       "utils/*": ["utils/*"],
+      "constants/*": ["constants/*"],
       "*": ["*", "*.ios", "*.android"]
     }
   },

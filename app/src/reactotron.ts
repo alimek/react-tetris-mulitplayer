@@ -4,7 +4,7 @@ import { reactotronRedux } from 'reactotron-redux';
 const reactotron = Reactotron
   .configure({
     name: 'React Native Demo',
-    host: 'localhost',
+    host: '192.168.1.35',
     port: 9090,
   })
   .useReactNative()
@@ -12,6 +12,8 @@ const reactotron = Reactotron
     isActionImportant: true,
   }))
   .connect();
+
+reactotron.clear();
 
 console.log = Reactotron.log;
 

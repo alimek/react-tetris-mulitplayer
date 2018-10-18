@@ -4,7 +4,7 @@ import { Container, Image } from './styles';
 import { PlayerModels } from 'reducers/player';
 
 interface IPlayerAvatarPropTypes {
-  name: PlayerModels;
+  name: PlayerModels | null;
 }
 
 const images = {
@@ -18,6 +18,10 @@ const images = {
 class PlayerAvatar extends React.Component<IPlayerAvatarPropTypes> {
   render() {
     const { name } = this.props;
+
+    if (!name) {
+      return null;
+    }
 
     return (
       <Container>
