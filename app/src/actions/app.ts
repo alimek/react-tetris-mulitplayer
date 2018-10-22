@@ -6,6 +6,7 @@ import {
 import { moveNext } from 'utils/swiper';
 import { AppType } from 'reducers/app';
 import { setPlayerNotReady, setPlayerReady } from 'actions/player';
+import { NavigationActions } from 'react-navigation';
 
 export const changeGameType = (type: string) => dispatch => {
   dispatch({
@@ -28,4 +29,8 @@ export const incrementIndex = () => ({
 
 export const decrementIndex = () => ({
   type: SWIPER_INDEX_DECREMENT,
+});
+
+export const resetToMenu = () => NavigationActions.navigate({
+  routeName: 'SwiperPage',
 });

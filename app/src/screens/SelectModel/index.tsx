@@ -8,33 +8,27 @@ import {
   ArrowUp,
   Button,
   Container,
-  ControlsContainer,
   PlayerBackgroundPosition,
-  PlayerNameContainer,
   SwiperContainer,
-  Text,
+  ControlsContainer,
 } from './styles';
-import { Input, Page, PlayerBackground, ThirdBackground } from 'components';
+import { Page, PlayerBackground, ThirdBackground } from 'components';
 import { PlayerModel } from 'containers';
 import { screenHeight } from 'utils/screen';
 import { IStore } from '../../store';
 import {
   changeModelIndex,
   changePlayerModel,
-  changePlayerName,
 } from 'actions/player';
 import { players } from 'reducers/player';
-import { AppType } from 'reducers/app';
 
 interface ParentProps {
   name: string;
   model: string | null;
-  appMode: AppType | null;
 }
 
 interface DispatchProps {
   actions: {
-    changePlayerName: (name: string) => void;
     changePlayerModel: (model: string) => void;
     changeModelIndex: (index: number) => void;
   };
@@ -48,7 +42,7 @@ type Props = ParentProps & DispatchProps;
 
 const arrow = require('../../assets/arrow1.png');
 
-class PlayerSelect extends React.Component<Props, State> {
+class SelectModel extends React.Component<Props, State> {
   carousel: any;
 
   state = {
@@ -84,24 +78,13 @@ class PlayerSelect extends React.Component<Props, State> {
 
   render() {
     const { isReady } = this.state;
-    const { name, actions, model, appMode } = this.props;
+    const { actions, model } = this.props;
 
     return (
       <Page hasHeader showBackButton title="PLAYER">
         <Container>
           <ThirdBackground />
-          <ControlsContainer>
-            {!appMode || appMode !== AppType.SINGLE ? (
-              <PlayerNameContainer>
-                <Text>NAME</Text>
-                <Input
-                  value={name}
-                  onChangeText={actions.changePlayerName}
-                  returnKeyType="done"
-                />
-              </PlayerNameContainer>
-            ) : null}
-          </ControlsContainer>
+          <ControlsContainer />
           <SwiperContainer>
             <Button onPress={this.moveUp}>
               <ArrowUp source={arrow} />
@@ -146,13 +129,12 @@ class PlayerSelect extends React.Component<Props, State> {
 export default connect(
   (store: IStore) => ({
     model: store.player.model,
-    appMode: store.app.type,
     name: store.player.name.toUpperCase(),
   }),
   dispatch => ({
     actions: bindActionCreators(
-      { changePlayerName, changePlayerModel, changeModelIndex },
+      { changePlayerModel, changeModelIndex },
       dispatch,
     ),
   }),
-)(PlayerSelect);
+)(SelectModel);

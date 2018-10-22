@@ -13,7 +13,7 @@ import { navigateToGame } from 'actions/nav';
 
 export const changePlayerName = (name: string) => ({
   type: PLAYER_NAME_CHANGED,
-  name,
+  name: name.toUpperCase(),
 });
 
 export const changePlayerModel = (model: string) => dispatch => {

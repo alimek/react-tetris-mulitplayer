@@ -4,6 +4,7 @@ import { createStackNavigator } from 'react-navigation';
 
 import Game from 'screens/Game';
 import SwiperPage from 'screens/SwiperPage';
+import Player from 'screens/Player';
 
 const transitionConfig = () => {
   return {
@@ -31,6 +32,12 @@ const transitionConfig = () => {
 
 export default createStackNavigator(
   {
+    Player: {
+      screen: Player,
+      navigationOptions: {
+        gesturesEnabled: false,
+      },
+    },
     SwiperPage: {
       screen: SwiperPage,
       navigationOptions: {

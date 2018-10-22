@@ -5,7 +5,7 @@ interface ParentProps {}
 
 import Menu from 'screens/Menu';
 import SelectPad from 'screens/SelectPad';
-import PlayerSelect from 'screens/SelectPlayer';
+import SelectModel from 'screens/SelectModel';
 import SkyBackground from 'components/SkyBackground';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -33,7 +33,7 @@ class SwiperPage extends React.Component<ParentProps> {
             loadMinimalSize={1}
           >
             <Menu />
-            <PlayerSelect />
+            <SelectModel />
             <SelectPad />
           </Swiper>
         </Page>

@@ -5,6 +5,7 @@ import { Animated, TextInputProps } from 'react-native';
 
 interface ParentProps {
   value: string;
+  inputRef?: (Input) => void;
 }
 
 interface State {
@@ -54,7 +55,7 @@ class Input extends React.Component<Props, State> {
   };
 
   render() {
-    const { value, ...others } = this.props;
+    const { value, inputRef, ...others } = this.props;
     const { flashing } = this.state;
 
     return (
@@ -65,13 +66,14 @@ class Input extends React.Component<Props, State> {
           selectionColor="transparent"
           autoCorrect={false}
           autoCapitalize="none"
-          maxLength={12}
+          maxLength={16}
           {...others}
           onFocus={this.show}
           onBlur={this.stop}
+          innerRef={inputRef}
         />
         {
-          value.length < 12 ?
+          value.length < 16 ?
             <Square
               length={value.length}
               style={{

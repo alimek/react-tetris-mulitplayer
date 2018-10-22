@@ -1,4 +1,5 @@
 import { produce } from 'immer';
+import { REHYDRATE } from 'redux-persist'
 import {
   PLAYER_IS_NOT_READY,
   PLAYER_IS_READY,
@@ -44,6 +45,12 @@ const initialState: IPlayerStore = {
 export default (state = initialState, action: any = {}) => {
   return produce(state, draft => {
     switch (action.type) {
+      case REHYDRATE: {
+        if (action.payload && action.payload.player) {
+          draft.name = action.payload.player.name;
+        }
+        break;
+      }
       case PLAYER_NAME_CHANGED:
         draft.name = action.name;
         break;

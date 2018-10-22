@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react'
 
-import store from './store';
+import store, { persistor } from './store';
 import AppNavigator from './redux-navigator';
 import { StatusBar } from 'react-native';
 
@@ -11,7 +12,9 @@ export default class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <AppNavigator />
+        <PersistGate loading={null} persistor={persistor}>
+          <AppNavigator />
+        </PersistGate>
       </Provider>
     );
   }

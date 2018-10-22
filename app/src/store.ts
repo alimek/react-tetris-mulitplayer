@@ -1,8 +1,8 @@
 import { createStore as reduxCreateStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
-import {
-  createReactNavigationReduxMiddleware,
-} from 'react-navigation-redux-helpers';
+import { createReactNavigationReduxMiddleware } from 'react-navigation-redux-helpers';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
 import reducers from './reducers';
 import { IPlayerStore } from 'reducers/player';
@@ -16,8 +16,16 @@ export interface IStore {
   game: IGameStore;
 }
 
+const persistConfig = {
+  key: 'root',
+  storage,
+  whitelist: [
+    'player',
+  ],
+};
+
 const middleware = createReactNavigationReduxMiddleware(
-  "root",
+  'root',
   (state: IStore) => state.nav,
 );
 
@@ -28,12 +36,14 @@ if (__DEV__) {
   Reactotron = require('./reactotron').default;
 }
 
-const createStore = Reactotron === null
-  ? reduxCreateStore
-  : Reactotron.createStore;
+const createStore =
+  Reactotron === null ? reduxCreateStore : Reactotron.createStore;
+
+const persistedReducer = persistReducer(persistConfig, reducers);
 
 // @ts-ignore
-export default createStore(
-  reducers,
-  applyMiddleware(ReduxThunk, middleware),
-);
+const store = createStore(persistedReducer, applyMiddleware(ReduxThunk, middleware));
+
+export const persistor = persistStore(store);
+
+export default store;

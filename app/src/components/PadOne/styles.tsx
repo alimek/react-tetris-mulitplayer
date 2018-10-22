@@ -15,8 +15,8 @@ export const Touchable = styled.TouchableOpacity<{
   size?: number;
 }>`
   position: absolute;
-  width: ${props => props.size || 15}px;
-  height: ${props => props.size || 15}px;
+  width: ${props => props.size || 16}px;
+  height: ${props => props.size || 16}px;
 `;
 
 export const TouchableChild = styled.View``;

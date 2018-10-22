@@ -1,4 +1,5 @@
 import * as React from 'react';
+import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 
 import { Container, Image, Touchable, TouchableChild } from './styles';
 import { ViewStyle } from 'react-native';
@@ -15,20 +16,36 @@ interface ParentProps {
 }
 
 const padOne = require('../../assets/pad.png');
+const padFull = require('../../assets/pad-one-full.png');
 
 class PadOne extends React.Component<ParentProps> {
   interval: any;
-
   static defaultProps = {
     isClickable: false,
   };
 
-  onPressIn = () => {
-    this.interval = setInterval(this.props.onPressMoveDown, 100);
+  pressedOut: boolean = false;
+
+  onPressIn = (callback: () => void) => {
+    this.pressedOut = false;
+    this.vibrateAndRun(callback);
+    setTimeout(() => {
+      if (!this.pressedOut) {
+        this.interval = setInterval(() => this.vibrateAndRun(callback), 100);
+      }
+    }, 100);
   };
 
   onPressOut = () => {
-    clearInterval(this.interval);
+    this.pressedOut = true;
+    if (this.interval) {
+      clearInterval(this.interval);
+    }
+  };
+
+  vibrateAndRun = (callback: () => void): void => {
+    ReactNativeHapticFeedback.trigger('impactLight', false);
+    callback();
   };
 
   render() {
@@ -37,19 +54,20 @@ class PadOne extends React.Component<ParentProps> {
       onPressMoveRight,
       onPressRotateLeft,
       onPressRotateRight,
+      onPressMoveDown,
       isClickable,
     } = this.props;
 
     return (
       <Container style={this.props.style}>
-        <Image source={padOne} resizeMode="contain" />
+        <Image source={isClickable ? padFull : padOne} resizeMode="contain" />
         {isClickable ? (
           <React.Fragment>
             <Touchable
-              onPress={onPressRotateLeft}
+              onPress={() => this.vibrateAndRun(onPressRotateLeft)}
               style={{
-                top: 24,
-                left: 105,
+                top: 20,
+                left: 108,
               }}
               hitSlop={{
                 left: 15,
@@ -61,9 +79,9 @@ class PadOne extends React.Component<ParentProps> {
               <TouchableChild />
             </Touchable>
             <Touchable
-              onPress={onPressRotateRight}
+              onPress={() => this.vibrateAndRun(onPressRotateRight)}
               style={{
-                top: 37,
+                top: 33,
                 left: 84,
               }}
               hitSlop={{
@@ -78,8 +96,8 @@ class PadOne extends React.Component<ParentProps> {
             <Touchable
               size={13}
               style={{
-                top: 19,
-                left: 31,
+                top: 17,
+                left: 30,
               }}
             >
               <TouchableChild />
@@ -87,10 +105,10 @@ class PadOne extends React.Component<ParentProps> {
             <Touchable
               size={13}
               style={{
-                top: 47,
-                left: 31,
+                top: 44,
+                left: 30,
               }}
-              onPressIn={this.onPressIn}
+              onPressIn={() => this.onPressIn(onPressMoveDown)}
               onPressOut={this.onPressOut}
               hitSlop={{
                 left: 10,
@@ -102,11 +120,12 @@ class PadOne extends React.Component<ParentProps> {
               <TouchableChild />
             </Touchable>
             <Touchable
-              onPress={onPressMoveLeft}
+              onPressIn={() => this.onPressIn(onPressMoveLeft)}
+              onPressOut={this.onPressOut}
               size={13}
               style={{
-                top: 33,
-                left: 18,
+                top: 31,
+                left: 16,
               }}
               hitSlop={{
                 left: 30,
@@ -118,11 +137,12 @@ class PadOne extends React.Component<ParentProps> {
               <TouchableChild />
             </Touchable>
             <Touchable
-              onPress={onPressMoveRight}
+              onPressIn={() => this.onPressIn(onPressMoveRight)}
+              onPressOut={this.onPressOut}
               size={13}
               style={{
-                top: 33,
-                left: 43,
+                top: 30,
+                left: 44,
               }}
               hitSlop={{
                 left: 0,
